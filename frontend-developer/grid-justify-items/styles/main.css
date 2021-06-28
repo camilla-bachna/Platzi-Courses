@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  text-align: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 33.33% 33.33% 33.33%;
+  grid-template-rows: 33.33% 33.33% 33.33%;
+  height: 100vh;
+}
+
+.item {
+  width: 70%;
+  background-color: orange;
+  place-self: stretch center;
+}
