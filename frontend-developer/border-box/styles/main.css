@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+}
+
+.bluecontainer {
+    width: 140px;
+    height: 140px;
+    padding: 60px;
+    border: 5px solid red;
+    margin: 10px;
+    background-color: blue;
+    box-sizing: border-box;
+}
+
+/* box-sizing: border-box => width and height of the box are each 10px (2x), padding 60px (4x), border 5px (4x); width: 10px (content) + 120px (padding) + 10px (border) = 140px, height: 10px (content) + 120px (padding) + 10px (border) = 140px */
+
+.redcontainer {
+    width: 50px;
+    height: 50px;
+    padding: 50px;
+    border: 5px solid blue;
+    margin: 10px;
+    background-color: red;
+    box-sizing: content-box;
+}
