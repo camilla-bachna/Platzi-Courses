@@ -1,0 +1,39 @@
+*{
+    margin: 20px;
+    list-style: none;
+    font-size: 25px;
+    text-decoration: none;
+}
+
+/* li:first-child{
+    color:blue
+}
+
+li:last-child{
+    color: green;
+} */
+
+li:nth-child(2n){
+    color: green;
+}
+
+li:nth-child(2n+1){
+    color: blue;
+}
+
+p::first-letter{
+    color: royalblue;
+    font-size: 35px;
+}
+
+a:hover{
+    font-size: 35px;
+}
+
+a:visited{
+    color: black;
+}
+
+a::after{
+    content: " =>";
+}
