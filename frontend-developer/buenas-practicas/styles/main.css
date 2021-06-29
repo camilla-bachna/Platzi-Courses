@@ -1,0 +1,21 @@
+.globalwidth {
+  width: 100%;
+}
+
+.button-common {
+  width: 80px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid grey;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.header__button--red {
+  background-color: red;
+}
+
+.header__button--blue {
+  background-color: blue;
+}
