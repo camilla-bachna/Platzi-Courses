@@ -7,29 +7,35 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
-  <body class="container">
+  <body class="global">
     <header class="header">
       <img
         src="./images/logo-platzi-video.png"
         alt="Platzi logo containing a dice and text PlatziVideo"
+        class="header__image"
       />
-      <nav class="nav">
-        <ul class="nav__list">
-          <li class="nav__list--link"><a href="contact.html">Contacto</a></li>
-          <li class="nav__list--link"><a href="profile.html">Perfil</a></li>
+      <nav class="header__nav">
+        <ul class="header__nav-list">
+          <li class="header__nav-list--item">
+            <a href="contact.html" class="link">Contacto</a>
+          </li>
+          <li class="header__nav-list--item">
+            <a href="profile.html" class="link">Perfil</a>
+          </li>
         </ul>
       </nav>
     </header>
     <main class="main">
-      <section class="section">
-        <h2>Perfil</h2>
-        <a href="index.html" class="link--return-main-page"
-          >Volver a la página principal</a
-        >
+      <section class="contact-section">
+        <h2 class="profile-section--title">Perfil</h2>
+        <a href="index.html" class="link">Volver a la página principal</a>
       </section>
     </main>
     <footer class="footer">
-      <small>Footer </small>
+      <a href="/" class="link footer__link">Terminos de uso</a>
+      <a href="/" class="link footer__link">Declaración de privacidad</a>
+      <a href="/" class="link footer__link">Centro de ayuda</a>
     </footer>
+  </body>
   </body>
 </html>

@@ -131,6 +131,16 @@
   font-weight: bold;
 }
 
+.contact-section--title {
+  margin: 40px;
+  text-align: center;
+}
+
+.profile-section--title {
+  margin: 40px;
+  text-align: center;
+}
+
 .footer {
   display: flex;
   flex-direction: row;
