@@ -17,7 +17,7 @@
   height: 10vh;
   display: flex;
   justify-content: space-between;
-  padding: 0 10px 0 10px;
+  padding: 0px 10px 0px 10px;
 }
 
 .header__image {
@@ -63,23 +63,23 @@
 
 .main {
   width: 100%;
+  height: 80vh;
 }
 
-.main-section {
+.search-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 80vh;
   font-size: 25px;
 }
 
-.main-section__form {
+.search-section__form {
   width: 100%;
 }
 
-.main-section__search-input {
+.search-section__search-input {
   background-color: rgba(255, 255, 255, 0.1);
   width: 60%;
   height: 5vh;
@@ -96,6 +96,76 @@
   color: rgb(255, 255, 255);
 }
 
+.carousel-section {
+  width: 100%;
+  overflow: scroll;
+  padding: 30px;
+  position: relative;
+}
+
+.carousel-section__container {
+  white-space: nowrap;
+  margin: 70px 0px;
+  padding-bottom: 10px;
+}
+
+.carousel-section-item {
+  display: inline-block;
+  background-color: palevioletred;
+  width: 200px;
+  height: 250px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: 450ms all;
+  transform-origin: center left;
+  position: relative;
+}
+
+.carousel-section-item:hover ~ .carousel-section-item {
+  transform: translate3d(100px, 0, 0);
+}
+
+.carousel-section__container:hover .carousel-section-item {
+  opacity: 0.3;
+}
+
+.carousel-section__container:hover .carousel-section-item:hover {
+  transform: scale(1.5);
+  opacity: 1;
+}
+
+.carousel-section-item__image {
+  width: 200px;
+  height: 250px;
+  object-fit: cover;
+}
+
+.carousel-section-item__details {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  font-size: 10px;
+  opacity: 0;
+  transition: 450ms opacity;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.carousel-section-item:hover .carousel-section-item__details {
+  opacity: 1;
+}
+
+.carousel-section-item__icon {
+  color: turquoise;
+}
+
 .footer {
   width: 100%;
   height: 7vh;
@@ -106,7 +176,7 @@
   justify-content: space-around;
   align-items: center;
   padding: 10px;
-  height: 7vh;
+  height: 5vh;
   text-align: center;
 }
 
