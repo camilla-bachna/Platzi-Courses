@@ -7,7 +7,6 @@
 }
 
 .global {
-  height: 100vh;
   background-image: linear-gradient(rgb(33, 192, 139), rgb(171, 136, 255));
   color: rgb(255, 255, 255);
   font-family: "Mulish", sans-serif;
@@ -151,10 +150,42 @@
 }
 
 .footer__link {
-  padding: 30px;
+  padding: 0 30px;
 }
 
 .link--return-main-page {
   padding: 20px;
   font-size: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .header__image {
+    margin: 10px;
+    width: 150px;
+    height: auto;
+  }
+
+  .login-section {
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    width: 100%;
+  }
+
+  .login-section--title {
+    margin-bottom: 0px;
+  }
+
+  .social-media-section {
+    margin: 0px;
+  }
+
+  .social-media-section__container {
+    margin: 0px;
+  }
+
+  .footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
