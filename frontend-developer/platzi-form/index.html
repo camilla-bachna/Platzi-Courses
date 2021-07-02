@@ -21,6 +21,7 @@
         src="./images/logo-platzi-video.png"
         alt="Platzi logo containing a dice and text PlatziVideo"
         class="header__image"
+        tabindex="0"
       />
       <nav class="header__nav">
         <ul class="header__nav-list">
@@ -35,22 +36,22 @@
     </header>
     <main class="main">
       <section class="login-section">
-        <h2 class="login-section--title">Inicia sesión</h2>
+        <h2 class="login-section--title" tabindex="0">Inicia sesión</h2>
         <form class="form">
-          <label for="email" class="form__label"></label
-          ><input
+          <input
             type="text"
             name="email"
             id="email"
             class="form__input"
+            aria-label="Correo"
             placeholder="Correo"
           />
-          <label for="password" class="form__label"></label
-          ><input
+          <input
             type="password"
             name="password"
             id="password"
             class="form__input"
+            aria-label="Contraseña"
             placeholder="Contraseña"
           />
           <input type="button" class="form__button" value="Iniciar sesión" />
@@ -70,14 +71,14 @@
         </form>
 
         <section class="social-media-section">
-          <div class="social-media-section__container">
+          <div class="social-media-section__container" tabindex="0">
             <i
               class="fab fa-google social-media-section__container--icon"
               title="Google"
             ></i>
             Inicia sesión con Google
           </div>
-          <div class="social-media-section__container">
+          <div class="social-media-section__container" tabindex="0">
             <i
               class="fab fa-twitter social-media-section__container--icon"
               title="Twitter"
