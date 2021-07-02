@@ -1,0 +1,89 @@
+* {
+  box-sizing: outline-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+.global {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.header {
+  width: 100%;
+  height: 5rem;
+  outline: 1px dashed red;
+}
+
+.header__nav-list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: rgb(255, 255, 255);
+}
+
+.header__nav-list--item {
+  text-align: center;
+  flex-grow: 1;
+  line-height: 5rem;
+  transition: flex 0.5s;
+}
+
+.header__nav-list--item1 {
+  background-color: rgb(3, 3, 141);
+}
+
+.header__nav-list--item2 {
+  background-color: red;
+}
+
+.header__nav-list--item3 {
+  background-color: rgb(236, 104, 27);
+}
+
+.header__nav-list--item4 {
+  background-color: rgb(194, 0, 74);
+}
+
+.header__nav-list--item:hover {
+  flex-grow: 2;
+  font-size: 20px;
+}
+
+.main {
+  display: flex;
+  height: inherit;
+}
+
+.title {
+  display: inline-block;
+}
+
+.main-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  outline: 1px dashed red;
+}
+
+.aside {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 30%;
+  outline: 1px dashed red;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 5rem;
+  margin-top: auto;
+  outline: 1px dashed red;
+}
