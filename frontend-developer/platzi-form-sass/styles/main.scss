@@ -1,0 +1,192 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+//colors
+$white: rgb(255, 255, 255);
+$background-image: linear-gradient(rgb(33, 192, 139), rgb(171, 136, 255));
+
+//font
+$font-family: "Mulish", sans-serif;
+
+//display:flex
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.global {
+  background-image: $background-image;
+  color: $white;
+  font-family: $font-family;
+}
+
+.header {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  &__image {
+    margin: 10px;
+    height: 7vh;
+  }
+  &__nav-list {
+    display: flex;
+    margin: 25px;
+    &--item {
+      padding-left: 15px;
+      font-size: 18px;
+    }
+  }
+}
+
+.main {
+  min-height: calc(100vh - 200px);
+  padding: 0px 30px;
+  @extend .flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-section {
+  @extend .flex;
+  justify-content: space-around;
+  width: 400px;
+  min-height: 700px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid $white;
+  border-radius: 40px;
+  padding: 60px 60px 40px;
+  font-size: 14px;
+  &--title {
+    margin-bottom: 20px;
+    font-size: 25px;
+    font-weight: bold;
+  }
+}
+
+.form {
+  @extend .flex;
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  &__input {
+    background-color: transparent;
+    outline: none;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 2px solid $white;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+  }
+  &__button {
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: $white;
+    letter-spacing: 1px;
+    margin: 10px 0px;
+  }
+}
+
+::placeholder {
+  color: $white;
+}
+
+.link {
+  &:visited {
+    color: $white;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.social-media-section {
+  margin: 30px 0px;
+  &__container {
+    margin: 10px 0px;
+    &--icon {
+      margin-right: 10px;
+    }
+  }
+}
+
+.login-section__link--register {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.contact-section--title {
+  margin: 40px;
+  text-align: center;
+}
+
+.profile-section--title {
+  margin: 40px;
+  text-align: center;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  font-size: 14px;
+  &__link {
+    padding: 0 30px;
+  }
+}
+
+.link--return-main-page {
+  padding: 20px;
+  font-size: 20px;
+}
+
+@media all and (max-width: 600px) {
+  .header__image {
+    margin: 10px;
+    width: 150px;
+    height: 8vh;
+    min-height: 50px;
+    max-height: 55px;
+  }
+
+  .login-section {
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    width: 100%;
+  }
+
+  .login-section--title {
+    margin-bottom: 0px;
+  }
+
+  .social-media-section {
+    margin: 0px;
+  }
+
+  .social-media-section__container {
+    margin: 0px;
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
