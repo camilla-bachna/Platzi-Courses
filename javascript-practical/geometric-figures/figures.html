@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Figuras geométricas</title>
+  </head>
+  <body>
+    <header>
+      <h1>Figuras geométricas</h1>
+      <p>Este es el primer taller del curso práctico de JavaScript.</p>
+    </header>
+    <main>
+      <section>
+        <h2>Calcula el área y perímetro de un cuadrado</h2>
+        <form>
+          <label for="InputSquare"
+            >Escribe cuánto mide cada lado de tu cuadrado:</label
+          ><input type="number" name="sideSquare" id="InputSquare" />
+          <button type="button" onclick="calculatePerimeterSquare()">
+            Calcular el perímetro
+          </button>
+          <button type="button" onclick="calculateAreaSquare()">
+            Calcular el área
+          </button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Calcula el área y perímetro de un triángulo</h2>
+        <form>
+          <label for="InputSide1"
+            >Escribe cuánto mide el lado uno de tu triángulo:</label
+          ><input type="number" name="sideTriangle1" id="InputSide1" />
+          <label for="InputSide2"
+            >Escribe cuánto mide el lado dos de tu triángulo:</label
+          ><input type="number" name="sideTriangle2" id="InputSide2" />
+          <label for="InputBase"
+            >Escribe cuánto mide la base de tu triángulo:</label
+          ><input type="number" name="base" id="InputBase" />
+          <button type="button" onclick="calculatePerimeterTriangle()">
+            Calcular el perímetro
+          </button>
+          <button type="button" onclick="calculateAreaTriangle()">
+            Calcular el área
+          </button>
+        </form>
+      </section>
+    </main>
+    <footer></footer>
+    <script src="./figures.js"></script>
+  </body>
+</html>
