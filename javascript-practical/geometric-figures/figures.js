@@ -27,6 +27,43 @@ function perimeterTriangle(sideTriangle1, sideTriangle2, baseTriangle) {
   return sideTriangle1 + sideTriangle2 + baseTriangle;
 }
 
+//calculate height
+function heightTriangle(sideTriangle1, sideTriangle2, baseTriangle) {
+  if ((sideTriangle1 === sideTriangle2) !== baseTriangle) {
+    const height = Math.sqrt(
+      Math.pow(sideTriangle1, 2) - Math.pow(baseTriangle, 2) / 4
+    );
+    return height;
+  } else {
+    console.log("Los lados no son iguales");
+  }
+}
+
+/* function alturaTrianguloIsosceles(
+  trianguloGrandeLadoA,
+  trianguloGrandeLadoB,
+  trianguloGrandeLadoBase
+) {
+  if (trianguloGrandeLadoA != trianguloGrandeLadoB) {
+    console.error("Los lados a y b no son iguales");
+  } else {
+    const trianguloPequenoLadoB = trianguloGrandeLadoBase / 2;
+    const trianguloPequenoLadoBase = trianguloGrandeLadoA;
+
+    const trianguloPequenoLadoBCuadrado =
+      trianguloPequenoLadoB * trianguloPequenoLadoB;
+    const trianguloPequenoLadoBaseCuadrado =
+      trianguloPequenoLadoBase * trianguloPequenoLadoBase;
+
+    const trianguloPequenoLadoA = Math.sqrt(
+      trianguloPequenoLadoBaseCuadrado - trianguloPequenoLadoBCuadrado
+    );
+
+    const trianguloGrandeAltura = trianguloPequenoLadoA;
+    return trianguloGrandeAltura;
+  }
+}
+ */
 //area
 function areaTriangle(baseTriangle, heightTriangle) {
   return (baseTriangle * heightTriangle) / 2;
@@ -92,7 +129,7 @@ function calculateAreaTriangle() {
   alert(area);
 }
 const height = document.getElementById("InputBase");
-const valueBase = parseInt(base.value);
+const valueBase = parseInt(height.value);
 
 //circle
 function calculatePerimeterCircle() {
