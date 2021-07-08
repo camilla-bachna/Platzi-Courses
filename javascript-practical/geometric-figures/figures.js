@@ -12,14 +12,10 @@ function perimeterSquare(sideSquare) {
   return sideSquare * 4;
 }
 
-perimeterSquare(5);
-
 //area
 function areaSquare(sideSquare) {
   return sideSquare * sideSquare;
 }
-
-areaSquare(5);
 
 console.groupEnd();
 
@@ -83,8 +79,32 @@ function calculatePerimeterTriangle() {
   const valueSide2 = parseInt(input2.value);
   const base = document.getElementById("InputBase");
   const valueBase = parseInt(base.value);
-  const perimetro = perimeterTriangle(valueSide1, valueSide2, valueBase);
-  alert(perimetro);
+  const perimeter = perimeterTriangle(valueSide1, valueSide2, valueBase);
+  alert(perimeter);
 }
 
+function calculateAreaTriangle() {
+  const base = document.getElementById("InputBase");
+  const valueBase = parseInt(base.value);
+  const height = document.getElementById("InputHeight");
+  const valueHeight = parseInt(height.value);
+  const area = areaTriangle(valueBase, valueHeight);
+  alert(area);
+}
+const height = document.getElementById("InputBase");
+const valueBase = parseInt(base.value);
+
 //circle
+function calculatePerimeterCircle() {
+  const inputRadius = document.getElementById("Radius");
+  const valueRadius = parseInt(inputRadius.value);
+  const perimeter = perimeterCircle(valueRadius);
+  alert(perimeter);
+}
+
+function calculateAreaCircle() {
+  const inputRadius = document.getElementById("Radius");
+  const valueRadius = parseInt(inputRadius.value);
+  const area = areaCircle(valueRadius);
+  alert(area);
+}
