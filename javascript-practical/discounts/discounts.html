@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <title>Descuentos y porcentajes</title>
+  </head>
+  <body class="global">
+    <header class="header">
+      <h1 class="header--title">Descuentos y porcentajes</h1>
+    </header>
+    <main class="main">
+      <p class="main__paragraph">
+        Este es el segundo taller del Curso Práctico de JaveScript
+      </p>
+      <section class="main__section">
+        <h2 class="main__section--title">
+          Calcula el precio a pagar tus productos con descuento
+        </h2>
+        <form class="main__form">
+          <label for="InputPrice" class="main__form--label"
+            >¿Cuál es el precio de tu producto?</label
+          ><input
+            type="number"
+            name="originalprice"
+            class="main__form--input"
+            id="InputPrice"
+          />
+
+          <label for="InputDiscount" class="main__form--label"
+            >¿Cuál es el descuento (en %)?</label
+          >
+          <input
+            type="number"
+            name="discount"
+            class="main__form--input"
+            id="InputDiscount"
+          />
+
+          <button
+            type="button"
+            class="main__form--button"
+            onclick="calculateDiscount()"
+          >
+            Calcular
+          </button>
+        </form>
+        <h3 class="main__section--title">Resultado:</h3>
+        <p id="resultPrice" class="main__paragraph"></p>
+      </section>
+    </main>
+    <footer></footer>
+    <script src="./discounts.js"></script>
+  </body>
+</html>
