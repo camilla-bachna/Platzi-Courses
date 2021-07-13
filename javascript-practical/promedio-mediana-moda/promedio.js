@@ -1,6 +1,6 @@
 "use strict";
 
-function calculateAverage(list) {
+function calculatePromedio(list) {
   /*  let sumNumbersList = 0;
 
   for (let i = 0; i < list.length; i++) {

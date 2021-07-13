@@ -1,5 +1,5 @@
 "use strict";
-function calculateAverage(list) {
+function calculateMediana(list) {
   const sumNumbersList = list.reduce(function (
     accumulatedValue = 0,
     newElement
@@ -56,7 +56,7 @@ function calculateMediana(list) {
   if (isEven(list.length)) {
     const element1 = list[halfList - 1];
     const element2 = list[halfList];
-    const averageNumberOfElements = calculateAverage([element1, element2]);
+    const averageNumberOfElements = calculateMediana([element1, element2]);
     console.log(averageNumberOfElements);
     mediana = averageNumberOfElements;
   } else {
