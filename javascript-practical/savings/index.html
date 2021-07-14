@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <title>Calcular cuanto puedes ahorrar</title>
+  </head>
+  <body class="global">
+    <header class="header">
+      <h1 class="header--title">Ahorrar en un mes</h1>
+    </header>
+    <main class="main">
+      <section class="section">
+        <p class="main__paragraph">
+          ¿Quieres ahorrar dinero? Comprueba cuánto podrías ahorrar en un mes.
+        </p>
+        <form class="main__form">
+          <label for="income" class="main__form--label"></label
+          ><input
+            type="number"
+            name="income"
+            id="income"
+            class="main__form--input js-income"
+            placeholder="Ingresos"
+          />
+          <label for="livingCosts" class="main__form--label"></label
+          ><input
+            type="number"
+            name="livingCosts"
+            id="livingCosts"
+            class="main__form--input js-livingCosts"
+            placeholder="Pagos de alquiler o hipoteca"
+          />
+          <label for="groceries" class="main__form--label"></label
+          ><input
+            type="number"
+            name="groceries"
+            id="groceries"
+            class="main__form--input js-groceries"
+            placeholder="Alimentos"
+          />
+          <label for="expenses" class="main__form--label"></label
+          ><input
+            type="number"
+            name="expenses"
+            id="expenses"
+            class="main__form--input js-expenses"
+            placeholder="Electricidad, gas y otros gastos"
+          />
+          <label for="extras" class="main__form--label"></label
+          ><input
+            type="number"
+            name="extras"
+            id="extras"
+            class="main__form--input js-extras"
+            placeholder="Otros gastos"
+          />
+          <label for="month" class="main__form--label">Fecha</label>
+          <input
+            type="month"
+            name="month"
+            id="month"
+            min="2021-01"
+            max="2021-12"
+            class="js-month"
+          />
+          <button
+            type="button"
+            class="main__form--button"
+            onclick="addEventListenerCalculate()"
+          >
+            Calcular
+          </button>
+        </form>
+      </section>
+      <section class="section result-section">
+        <h2>Resultado</h2>
+        <div class="js-result"></div>
+      </section>
+    </main>
+    <footer class="footer"></footer>
+    <script src="./savings.js"></script>
+  </body>
+</html>
