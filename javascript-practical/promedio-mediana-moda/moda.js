@@ -59,7 +59,7 @@ const compare = [];
 const findDuplicates = (array) => {
   for (number of array) {
     if (!compare.includes(number)) {
-      //so if the number is not in the compare array add it
+      //if the number is not in the compare array add it
       compare.push(number);
     } else {
       // if it is already in compare array add it to duplicate array
@@ -71,14 +71,40 @@ const findDuplicates = (array) => {
 
 findDuplicates(array);
 
-console.log(compare);
+//console.log(compare);
 
+//compare original array with compare array and create new arrays with duplicated numbers and add length of these arrays to final array together with compared numbers
+let finalArray = [];
+let countedElement = 0;
+let highestNumber = 0;
 for (let i = 0; i < array.length; i++) {
-  let arrays = array.filter(function (listElement) {
+  let array_unit = array.filter(function (listElement) {
     return listElement === compare[i];
   });
-  console.log(arrays);
+  finalArray.push(compare[i]);
+  finalArray.push(array_unit.length);
 }
+console.log(finalArray); //[1, 3, 2, 5, 3, 2, 4, 1, ...]
+
+//take each number in second position and select highest number
+for (let i = 0; i < finalArray.length; i++) {
+  if (i % 2 !== 0) {
+    countedElement = finalArray[i];
+    if (countedElement > highestNumber) {
+      highestNumber = countedElement;
+    }
+  }
+}
+console.log(highestNumber);
+
+// moda is the number before the highest number
+let moda = 0;
+for (let i = 0; i < finalArray.length; i++) {
+  if (finalArray[i] === highestNumber) {
+    moda = finalArray[i - 1];
+  }
+}
+console.log(moda);
 
 /* 
 const originalList = [1, 2, 3, 1, 2, 2, 3, 4, 2, 2, 1];
