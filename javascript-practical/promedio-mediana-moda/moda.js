@@ -85,25 +85,17 @@ for (let i = 0; i < array.length; i++) {
   finalArray.push(array_unit.length);
 }
 console.log(finalArray); //[1, 3, 2, 5, 3, 2, 4, 1, ...]
-
-//take each number in second position and select highest number
-for (let i = 0; i < finalArray.length; i++) {
-  if (i % 2 !== 0) {
-    countedElement = finalArray[i];
-    if (countedElement > highestNumber) {
-      highestNumber = countedElement;
-    }
-  }
-}
-console.log(highestNumber);
-
-// moda is the number before the highest number
 let moda = 0;
-for (let i = 0; i < finalArray.length; i++) {
-  if (finalArray[i] === highestNumber) {
+//take each number in second position and select highest number
+for (let i = 1; i < finalArray.length; i = i + 2) {
+  countedElement = finalArray[i];
+  if (countedElement > highestNumber) {
+    highestNumber = countedElement;
     moda = finalArray[i - 1];
   }
 }
+
+console.log(highestNumber);
 console.log(moda);
 
 /* 
