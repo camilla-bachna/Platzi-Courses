@@ -1,6 +1,6 @@
 "use strict";
-const calculatorOfSavings = require("./calculatorOfSavings");
-const inputValues = require("./inputValues");
+import calculatorOfSavings from "./calculatorOfSavings";
+import inputValues from "./inputValues";
 
 const buttonElement = document.querySelector(".js-buttonEvent");
 
