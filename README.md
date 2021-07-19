@@ -6,3 +6,4 @@ Courses:
 - Frontend developer
 - Curso básico de JavaScript
 - Curso práctico de JavaScript
+- Curso de ECMAScript 6+
