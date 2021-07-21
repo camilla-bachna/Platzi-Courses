@@ -14,7 +14,7 @@ class Person {
     const surname = this.surname; */
     console.log(`Hola, me llamo ${name} ${surname}.`);
     if (fn) {
-      fn(name, surname); //null is like false or if we don`t add the 3rd parameter it will be undefined and undefined is false or wirte false
+      fn(name, surname); //isDev is false, null is like false or if we don`t add the 3rd parameter it will be undefined and undefined is false or wirte false
     }
   }
   tallPerson() {
@@ -36,7 +36,7 @@ class Developer extends Person {
     const { name, surname } = this;
     console.log(`Hola me llamo ${name} ${surname} y soy desarrollador/a.`);
     if (fn) {
-      fn(name, surname, true); //or write 1 or a string
+      fn(name, surname, true); //or write 1 or a string, here isDev is true
     }
   }
 }
