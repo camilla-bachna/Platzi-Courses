@@ -2,15 +2,6 @@ const API_URL = "https://swapi.dev/api/";
 const PEOPLE_URL = "people/:id/";
 const options = { crossDomain: true }; //crossDomain => to external page
 
-const onPeopleResponse = function (person) {
-  console.log(`Hola, yo soy ${person.name}`);
-  const films = person.films;
-  console.log(`He actuado ${filmSigularOrPlural(films)}:`);
-  films.map((filmUrl) => {
-    $.get(filmUrl, options, onFilmUrlResponse);
-  });
-};
-
 function onFilmUrlResponse(film) {
   return console.log(film.title);
 }
@@ -21,11 +12,30 @@ function filmSigularOrPlural(films) {
     : "en las siguientes películas";
 }
 
-function getACharacter(id) {
+function getACharacter(id, callback) {
   const url = `${API_URL}${PEOPLE_URL.replace(":id", id)}`;
-  $.get(url, options, onPeopleResponse);
+  $.get(url, options, callback).fail(() => {
+    console.log(`Sucedió un error. No se pudo obtener el personaje ${id}`);
+  });
 }
 
-for (let i = 1; i <= 10; i++) {
-  getACharacter(i);
-}
+//Callback hell
+getACharacter(1, function (person) {
+  console.log(`Hola, yo soy ${person.name}`);
+
+  getACharacter(2, function (person) {
+    console.log(`Hola, yo soy ${person.name}`);
+
+    getACharacter(3, function (person) {
+      console.log(`Hola, yo soy ${person.name}`);
+
+      getACharacter(4, function (person) {
+        console.log(`Hola, yo soy ${person.name}`);
+
+        getACharacter(5, function (person) {
+          console.log(`Hola, yo soy ${person.name}`);
+        });
+      });
+    });
+  });
+});
