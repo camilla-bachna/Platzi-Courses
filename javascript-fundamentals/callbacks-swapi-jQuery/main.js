@@ -5,14 +5,19 @@ const options = { crossDomain: true }; //crossDomain => to external page
 const onPeopleResponse = function (person) {
   console.log(`Hola, yo soy ${person.name}`);
   const films = person.films;
-  filmSigularOrPlural(films);
   console.log(`He actuado ${filmSigularOrPlural(films)}:`);
-  films.map((film) => console.log(film));
+  films.map((filmUrl) => {
+    $.get(filmUrl, options, onFilmUrlResponse);
+  });
 };
+
+function onFilmUrlResponse(film) {
+  return console.log(film.title);
+}
 
 function filmSigularOrPlural(films) {
   return films.length === 1
-    ? "el siguiente película"
+    ? "en la siguiente película"
     : "en las siguientes películas";
 }
 
