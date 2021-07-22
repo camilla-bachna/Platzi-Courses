@@ -2,16 +2,6 @@ const API_URL = "https://swapi.dev/api/";
 const PEOPLE_URL = "people/:id/";
 const options = { crossDomain: true };
 
-function onFilmUrlResponse(film) {
-  return console.log(film.title);
-}
-
-function filmSigularOrPlural(films) {
-  return films.length === 1
-    ? "en la siguiente película"
-    : "en las siguientes películas";
-}
-
 function getACharacter(id) {
   return new Promise((resolve, reject) => {
     const url = `${API_URL}${PEOPLE_URL.replace(":id", id)}`;
