@@ -89,71 +89,7 @@ function getCharacterInfo(characters) {
 
 module.exports = getCharacterInfo;
 
-},{"./filmSingularOrPlural":1,"./getFilmInfo":6}],5:[function(require,module,exports){
-"use strict";
-
-var _getACharacter = _interopRequireDefault(require("./getACharacter"));
-
-var _getCharacterInfo = _interopRequireDefault(require("./getCharacterInfo"));
-
-var _onError = _interopRequireDefault(require("./onError"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-/*
- * make the call to multiple promises: build with the array of ids an array of Promises (promisesCharacters) and pass it as a parameter to Promise.all().
- * await stops the execution of the programme until all promises are resolved => to control order in which characters are printed
- * catch() in case an error occurs
- */
-function getCharacters() {
-  return _getCharacters.apply(this, arguments);
-}
-
-function _getCharacters() {
-  _getCharacters = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    var ids, promisesCharacters, characters;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-            console.log("Enter async function getCharacters");
-            promisesCharacters = ids.map(function (id) {
-              return (0, _getACharacter["default"])(id);
-            });
-            _context.prev = 3;
-            _context.next = 6;
-            return Promise.all(promisesCharacters);
-
-          case 6:
-            characters = _context.sent;
-            (0, _getCharacterInfo["default"])(characters);
-            console.log("Finish async function getCharacters");
-            _context.next = 14;
-            break;
-
-          case 11:
-            _context.prev = 11;
-            _context.t0 = _context["catch"](3);
-            (0, _onError["default"])(_context.t0);
-
-          case 14:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, null, [[3, 11]]);
-  }));
-  return _getCharacters.apply(this, arguments);
-}
-
-module.exports = getCharacters;
-
-},{"./getACharacter":2,"./getCharacterInfo":4,"./onError":9}],6:[function(require,module,exports){
+},{"./filmSingularOrPlural":1,"./getFilmInfo":5}],5:[function(require,module,exports){
 "use strict";
 
 var _getAFilm = _interopRequireDefault(require("./getAFilm"));
@@ -217,7 +153,7 @@ function _getFilmInfo() {
 
 module.exports = getFilmInfo;
 
-},{"./getAFilm":3,"./getFilmTitle":7}],7:[function(require,module,exports){
+},{"./getAFilm":3,"./getFilmTitle":6}],6:[function(require,module,exports){
 "use strict";
 /*
  * to print name and filmtitle of Star Wars character in console
@@ -236,32 +172,84 @@ function getFilmTitle(filmsOfCharacters, name) {
 
 module.exports = getFilmTitle;
 
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
-/* The following programme contains source code to print the names and films of Star Wars characters in the console using the Star Wars API https://swapi.dev/. */
+/* The following programme contains source code to print the names and films of Star Wars characters in the console 
+using the Star Wars API https://swapi.dev/. */
 
 require("regenerator-runtime/runtime");
 
-var _getCharacters = _interopRequireDefault(require("./getCharacters"));
+var _getACharacter = _interopRequireDefault(require("./getACharacter"));
+
+var _getCharacterInfo = _interopRequireDefault(require("./getCharacterInfo"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-(0, _getCharacters["default"])();
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-},{"./getCharacters":5,"regenerator-runtime/runtime":10}],9:[function(require,module,exports){
-"use strict";
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+getCharacters();
+/*
+ * make the call to multiple promises: build with the array of ids an array of Promises (promisesCharacters) and 
+   pass it as a parameter to Promise.all().
+ * await stops the execution of the programme until all promises are resolved => 
+   to control order in which characters are printed
+ * catch() in case an error occurs
+ */
+
+function getCharacters() {
+  return _getCharacters.apply(this, arguments);
+}
 /*
  * to print message in console in case an error occurs
  * @param id: each id of array ids
  */
 
+
+function _getCharacters() {
+  _getCharacters = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var ids, promisesCharacters, characters;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            console.log("Enter async function getCharacters");
+            promisesCharacters = ids.map(function (id) {
+              return (0, _getACharacter["default"])(id);
+            });
+            _context.prev = 3;
+            _context.next = 6;
+            return Promise.all(promisesCharacters);
+
+          case 6:
+            characters = _context.sent;
+            (0, _getCharacterInfo["default"])(characters);
+            console.log("Finish async function getCharacters");
+            _context.next = 14;
+            break;
+
+          case 11:
+            _context.prev = 11;
+            _context.t0 = _context["catch"](3);
+            onError(_context.t0);
+
+          case 14:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[3, 11]]);
+  }));
+  return _getCharacters.apply(this, arguments);
+}
+
 function onError(id) {
   console.log("Sucedi\xE1 un error al obtener el personaje ".concat(id));
 }
 
-module.exports = onError;
-
-},{}],10:[function(require,module,exports){
+},{"./getACharacter":2,"./getCharacterInfo":4,"regenerator-runtime/runtime":8}],8:[function(require,module,exports){
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -1017,4 +1005,4 @@ try {
   }
 }
 
-},{}]},{},[8]);
+},{}]},{},[7]);
