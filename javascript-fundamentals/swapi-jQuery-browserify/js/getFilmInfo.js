@@ -11,9 +11,9 @@ function getFilmInfo(name, films) {
   console.log(`Enter function getFilmInfo`);
   const promisesFilms = films.map((filmUrl) => getAFilm(filmUrl));
   try {
-    Promise.all(promisesFilms).then((filmsOfCharacters) => {
-      getFilmTitle(filmsOfCharacters, name);
-    });
+    Promise.all(promisesFilms).then((filmsOfCharacters) =>
+      getFilmTitle(filmsOfCharacters, name)
+    );
   } catch {
     console.log("Error films");
   }
