@@ -5,11 +5,12 @@ const celeste = document.querySelector(".celeste");
 const violeta = document.querySelector(".violeta");
 const naranja = document.querySelector(".naranja");
 const verde = document.querySelector(".verde");
-const lastLevel = 10;
+const finalLevel = 10;
 
 //where all the logic of the game is
 class Game {
   constructor() {
+    this.initialize = this.initialize.bind(this);
     this.initialize();
     this.generateSequence();
     setTimeout(this.nextLevel, 500);
@@ -17,8 +18,7 @@ class Game {
   initialize() {
     this.nextLevel = this.nextLevel.bind(this); //like this nextLevel will always be Game, will not change context
     this.chooseColor = this.chooseColor.bind(this); //will always be Game
-    //first we have to hide the button Empezar
-    btnStart.classList.add("hide");
+    this.toggleBtnStart();
     //current level is 1
     this.level = 1;
     this.colors = {
@@ -29,11 +29,19 @@ class Game {
       verde,
     };
   }
+  toggleBtnStart() {
+    //btnStart.classList.toggle("hide")
+    if (btnStart.classList.contains("hide")) {
+      btnStart.classList.remove("hide");
+    } else {
+      btnStart.classList.add("hide");
+    }
+  }
   generateSequence() {
     //define the sequence internally in an attribute of the game
     //always when we want to add a new atribute we can write it like this
     //iit will get saved internally in th object of the game
-    this.sequence = new Array(lastLevel)
+    this.sequence = new Array(finalLevel)
       .fill(0)
       .map((n) => Math.floor(Math.random() * 4));
   }
@@ -107,8 +115,8 @@ class Game {
       if (this.sublevel === this.level) {
         this.level++;
         this.eliminateClickEvent();
-        if (this.level === lastLevel + 1) {
-          //Ganó!
+        if (this.level === finalLevel + 1) {
+          this.wonGame();
         } else {
           //attention: setTimeout changes the this => this is window, needs to be bind, put it in initialize
           setTimeout(this.nextLevel, 1500); // We are only using the reference to the function, call it, but don`t invoke it here (don`t write nextLevel())
@@ -117,7 +125,21 @@ class Game {
       }
     } else {
       //Perdió
+      this.lostGame();
     }
+  }
+  wonGame() {
+    //Sweetalert
+    swal("Genial", "Felicitaciones, ganaste el juego!", "success").then(
+      this.initialize() //since we only pass 1 function no need to write () => then(() => this.initialize() ); we can skip the arrow function
+    );
+  }
+  lostGame() {
+    //Sweetalert
+    swal("Oops...", "Lo lamentamos, perdiste :(", "error").then(() => {
+      this.eliminateClickEvent();
+      this.initialize();
+    });
   }
 }
 //initialize the game
