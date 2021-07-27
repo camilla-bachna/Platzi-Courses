@@ -1,17 +1,22 @@
-/* closures */
+/* immutable data */
 
-function createGreetings(finalPartOfSentence) {
-  //is a creating function of other functions
-  return function (name) {
-    //anonymous function, this function returns createGreetings will be each of the ones down (saluteArgetina ...)
-    console.log(`Hola ${name} ${finalPartOfSentence}`);
-  };
-}
+const camilla = {
+  name: "Camilla",
+  age: 28,
+};
 
-const saluteArgetina = createGreetings("che"); // here we send the final part of each sentence
-const saluteMexico = createGreetings("güey");
-const saluteColombia = createGreetings("amigo");
+const birthday = (person) => person.age++;
+/* each time we call birthday(camilla) in console, adds 1 year to age 28, 29, 30, 31 ...
+the object itself gets changed => write camilla in console {name: "Camilla", age: 31}
+we want to avoid that when we call a function this function changes things on the outside
+ */
 
-saluteArgetina("Sacha"); //Hola Sacha che
-saluteMexico("Sacha"); //Hola Sacha güey
-saluteColombia("Sacha"); //Hola Sacha amigo
+const birthdayUnchangeable = (person) => ({
+  // we create a new object in the memory, we don`t modify the above object
+  ...person,
+  edad: person.age + 1,
+}); //{name: "Camilla", age: 28, edad: 29}
+//but if you write afterwards  camilla in console {name: "Camilla", age: 28}, hasn`t changed
+
+const camilla29 = birthdayUnchangeable(camilla);
+console.log(camilla29); //{name: "Camilla", age: 28, edad: 29}
