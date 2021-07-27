@@ -1,5 +1,6 @@
 "use strict";
 
+import $ from "jquery";
 const apiUrl = "https://swapi.dev/api/";
 const people = "people/:id/";
 const optionCharacter = { crossDomain: true };

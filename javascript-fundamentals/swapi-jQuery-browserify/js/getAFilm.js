@@ -1,4 +1,6 @@
 "use strict";
+
+import $ from "jquery";
 const optionFilm = { crossDomain: true };
 /*
  * declare promise

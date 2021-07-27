@@ -8,16 +8,19 @@ import getFilmTitle from "./getFilmTitle";
  * @param films: array of films in which Star Wars character appeared
  * await to control order in which filmtitles are printed
  */
-async function getFilmInfo(name, films) {
-  console.log(`Enter async function getFilmInfo`);
+function getFilmInfo(name, films) {
+  console.log(`Enter function getFilmInfo`);
   const promisesFilms = films.map((filmUrl) => getAFilm(filmUrl));
   try {
-    const filmsOfCharacters = await Promise.all(promisesFilms);
-    getFilmTitle(filmsOfCharacters, name);
+    const filmsOfCharacters = Promise.all(promisesFilms).then(
+      (filmsOfCharacters) => {
+        getFilmTitle(filmsOfCharacters, name);
+      }
+    );
   } catch {
     console.log("Error films");
   }
-  console.log(`Finish async function getFilmInfo`);
+  console.log(`Finish function getFilmInfo`);
 }
 
 module.exports = getFilmInfo;
