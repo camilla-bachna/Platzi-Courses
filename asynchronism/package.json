@@ -1,0 +1,19 @@
+{
+  "name": "asynchronism",
+  "version": "1.0.0",
+  "description": "work with asynchronism",
+  "main": "src/index.html",
+  "scripts": {
+    "callback": "node src/callback/main.js"
+  },
+  "keywords": [
+    "callbacks",
+    "promises",
+    "async-await"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "xmlhttprequest": "^1.8.0"
+  }
+}
