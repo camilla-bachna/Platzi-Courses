@@ -7,3 +7,5 @@ Courses:
 - Curso básico de JavaScript
 - Curso práctico de JavaScript
 - Curso de ECMAScript 6+
+- Curso Fundamentos de JavaScript
+- Curso de Asincronismo con JavaScript
