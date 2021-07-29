@@ -1,5 +1,6 @@
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
+//without callback
 const fetchData = (urlApi) => {
   return new Promise((resolve, reject) => {
     const xhttp = new XMLHttpRequest();
@@ -7,7 +8,8 @@ const fetchData = (urlApi) => {
     xhttp.onreadystatechange = () => {
       if (xhttp.readyState === 4) {
         xhttp.status === 200
-          ? resolve(JSON.parse(xhttp.responseText))
+          ? //if this condition occurs resolve will be executed
+            resolve(JSON.parse(xhttp.responseText))
           : reject(new Error("Error", urlApi));
       }
     };

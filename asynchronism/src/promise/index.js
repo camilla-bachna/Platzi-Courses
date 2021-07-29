@@ -1,5 +1,6 @@
 "use strict";
 const somethingWIllHappen = () => {
+  //create a new promise, pass it 2 arguments (resolve => gets executed correctly, reject)
   return new Promise((resolve, reject) => {
     if (true) {
       resolve("Hey!");
@@ -20,6 +21,7 @@ const somethingWIllHappen2 = () => {
         resolve("True");
       }, 2000);
     } else {
+      //best practice, more information, easier to fix bugs
       const error = new Error("Whooops!");
       reject(error);
     }
@@ -28,12 +30,15 @@ const somethingWIllHappen2 = () => {
 
 somethingWIllHappen2()
   .then((response) => console.log(response))
+  //we can add more thens (.then().then())
+  //with catch we control errors
   .catch((error) => console.error(error));
 
-/* Promise all */
+/* Promise all => how to run several promises at the same time or chained together */
 Promise.all([somethingWIllHappen(), somethingWIllHappen2()])
   .then((response) => {
-    console.log("Array of results", response);
+    //returns an array with the results
+    console.log("Array of results", response); //Array of results [ 'Hey!', 'True' ]
   })
   .catch((error) => {
     console.error(error);
