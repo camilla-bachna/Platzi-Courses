@@ -4,7 +4,8 @@
   "description": "work with asynchronism",
   "main": "src/index.html",
   "scripts": {
-    "callback": "node src/callback/main.js"
+    "callback": "node src/callback/main.js",
+    "callback:challenge": "node src/callback/challenge.js"
   },
   "keywords": [
     "callbacks",
