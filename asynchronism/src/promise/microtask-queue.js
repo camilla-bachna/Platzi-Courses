@@ -7,17 +7,17 @@ but it might also queue up asynchronous events to be called back later */
 // L1
 console.log(`Synchronous 1`);
 
-// L1
+// L2
 //if it is a macrotask like a setTimeout or setInterval it will be executed on the next event loop
 // 0 time delay
 setTimeout((_) => console.log(`Timeout 2`), 0);
 
-// L1
+// L3
 //but if it is a microtask like a fulfilled promise then it will be called back before the start of the next event loop
 //resolves right away
 Promise.resolve().then((_) => console.log(`Promise 3`));
 
-// L1
+// L4
 console.log(`Synchronous 4`);
 
 /* This is the order it will appear: nothing has an actual time delay, 
