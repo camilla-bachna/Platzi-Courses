@@ -10,6 +10,7 @@
     "promise:challenge": "node src/promise/challenge.js",
     "promiseOtherVersion:challenge": "node src/promise/challengeOtherVersion.js",
     "challengePromiseAll": "node src/challengePromiseAll/main.js",
+    "async": "node src/async/index.js",
     "build": "browserify src/challengePromiseAll/main.js -o src/challengePromiseAll/bundle.js -t babelify",
     "watch": "watchify src/challengePromiseAll/main.js -o src/challengePromiseAll/bundle.js -t babelify"
   },
