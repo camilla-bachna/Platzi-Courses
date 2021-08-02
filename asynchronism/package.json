@@ -24,6 +24,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "install": "^0.13.0",
+    "node-fetch": "^2.6.1",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
