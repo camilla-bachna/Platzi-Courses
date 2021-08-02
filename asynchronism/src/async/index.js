@@ -37,7 +37,8 @@ console.log("Before 2");
 anotherFunction();
 console.log("After 2");
 
-/* After 1
+/* Before 1
+After 1
 Before 2
 After 2
 Do Something Async (after 3 seconds both appear together)
