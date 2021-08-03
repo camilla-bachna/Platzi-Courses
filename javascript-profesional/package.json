@@ -1,0 +1,17 @@
+{
+  "name": "platzi-media-player",
+  "version": "1.0.0",
+  "description": "Project of the Professional JavaScript Course of the Platzi JavaScript School.",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server"
+  },
+  "keywords": [
+    "platzi"
+  ],
+  "author": "Camilla Bachna",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
