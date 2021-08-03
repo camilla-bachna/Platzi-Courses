@@ -1,115 +1,109 @@
 "use strict";
 
-/* The following programme contains source code to print the names and films of Star Wars characters in the console using the Star Wars API https://swapi.dev/. */
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const API = "https://swapi.dev/api/";
+const people = "people/";
+const allFilms = "films/";
 
-const apiUrl = "https://swapi.dev/api/";
-const people = "people/:id/";
-const options = { crossDomain: true };
-
-getCharacters();
-
-/*
- * make the call to multiple promises: build with the array of ids an array of Promises (promisesCharacters) and pass it as a parameter to Promise.all().
- * await stops the execution of the programme until all promises are resolved => to control order in which characters are printed
- * catch() in case an error occurs
- */
-async function getCharacters() {
-  const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  console.log(`Enter async function getCharacters`);
-  const promisesCharacters = ids.map((id) => getACharacter(id));
-  try {
-    const characters = await Promise.all(promisesCharacters);
-    getCharacterInfo(characters);
-    console.log(`Finish async function getCharacters`);
-  } catch (id) {
-    onError(id);
-  }
-}
-
-/*
- * declare promise
- * @param id: part of the urls, each id of array ids
- * jQuery $.get to make a request
- */
-function getACharacter(id) {
+const fetchData = (urlApi) => {
   return new Promise((resolve, reject) => {
-    const url = `${apiUrl}${people.replace(":id", id)}`;
-    $.get(url, options, function (data) {
-      resolve(data);
-    }).fail(() => reject(id));
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("GET", urlApi, true);
+    xhttp.onreadystatechange = () => {
+      if (xhttp.readyState === 4) {
+        xhttp.status === 200
+          ? resolve(JSON.parse(xhttp.responseText))
+          : reject(new Error("Error", urlApi));
+      }
+    };
+
+    xhttp.send();
   });
-}
+};
 
-/*
- * to print message in console in case an error occurs
- * @param id: each id of array ids
- */
-function onError(id) {
-  console.log(`Sucediá un error al obtener el personaje ${id}`);
-}
-
-/*
- * to print name and films of Star Wars characters in console
- * @param characters: array of objects with info about Star Wars characters
- */
-function getCharacterInfo(characters) {
-  characters.map(({ name, films }) => {
-    console.group(name);
-    console.log(`Hola soy ${name}`);
-    console.log(`${filmSigularOrPlural(films)} ${films}`);
-    getFilmInfo(name, films);
-    console.groupEnd();
-  });
-}
-
-/*
- * to check if Star Wars character appeared in one or more films
- * @param films: array of films in which Star Wars character appeared
- */
-function filmSigularOrPlural(films) {
-  return films.length === 1
-    ? "He actuado en la película"
-    : "He actuado en las películas";
-}
-
-/*
- * build with the array of films an array of Promises (promisesFilms) and pass it as a parameter to Promise.all().
- * @param name: name of Star Wars characters
- * @param films: array of films in which Star Wars character appeared
- * await to control order in which filmtitles are printed
- */
-async function getFilmInfo(name, films) {
-  console.log(`Enter async function getFilmInfo`);
-  const promisesFilms = films.map((filmUrl) => getAFilm(filmUrl));
+const getCharactersAndFilms = async (urlApi) => {
   try {
-    const filmsOfCharacters = await Promise.all(promisesFilms);
-    getFilmTitle(filmsOfCharacters, name);
-  } catch {
-    console.log("Error films");
+    const character = await fetchData(`${urlApi}${people}`).then((response) =>
+      response.results.map((character) => {
+        return [character.name, character.films];
+      })
+    );
+    const films = await fetchData(`${urlApi}${allFilms}`).then((response) =>
+      response.results.map((films) => {
+        return [films.url, films.title];
+      })
+    );
+    let charactersAndFilms = character.flat(2);
+    //console.log(charactersAndFilms);
+    const filmUrlAndTitle = films.flat();
+    //console.log(filmUrlAndTitle);
+
+    let filmTitles;
+
+    for (let i = 0; i < charactersAndFilms.length; i++) {
+      filmTitles = charactersAndFilms[i];
+      for (let j = 0; j < filmUrlAndTitle.length; j++) {
+        if (charactersAndFilms[i] === filmUrlAndTitle[j]) {
+          filmTitles = filmUrlAndTitle[j + 1];
+        }
+      }
+      charactersAndFilms[i] = filmTitles;
+    }
+    console.log(charactersAndFilms);
+    /* [
+  'Luke Skywalker',
+  'A New Hope',
+  'The Empire Strikes Back',
+  'Return of the Jedi',
+  'Revenge of the Sith',
+  'C-3PO',
+  'A New Hope',
+  'The Empire Strikes Back',
+  'Return of the Jedi',
+  'The Phantom Menace',
+  'Attack of the Clones',
+  'Revenge of the Sith',
+  'R2-D2',
+  'A New Hope',
+  'The Empire Strikes Back',
+  'Return of the Jedi',
+  'The Phantom Menace',
+  'Attack of the Clones',
+  'Revenge of the Sith',
+  'Darth Vader',
+  'A New Hope',
+  'The Empire Strikes Back',
+  'Return of the Jedi',
+  'Revenge of the Sith',
+  'Leia Organa',
+  'A New Hope',
+  'The Empire Strikes Back',
+  'Return of the Jedi',
+  'Revenge of the Sith',
+  'Owen Lars',
+  'A New Hope',
+  'Attack of the Clones',
+  'Revenge of the Sith',
+  'Beru Whitesun lars',
+  'A New Hope',
+  'Attack of the Clones',
+  'Revenge of the Sith',
+  'R5-D4',
+  'A New Hope',
+  'Biggs Darklighter',
+  'A New Hope',
+  'Obi-Wan Kenobi',
+  'A New Hope',
+  'The Empire Strikes Back',
+  'Return of the Jedi',
+  'The Phantom Menace',
+  'Attack of the Clones',
+  'Revenge of the Sith'
+]
+ */
+  } catch (error) {
+    console.error(error);
   }
-  console.log(`Finish async function getFilmInfo`);
-}
+};
 
-/*
- * declare promise
- * @param filmUrl: the url to request info of films
- * jQuery $.get to make a request
- */
-function getAFilm(filmUrl) {
-  return new Promise((resolve, reject) => {
-    $.get(filmUrl, options, function (data) {
-      resolve(data);
-    }).fail(() => reject(console.log("Error")));
-  });
-}
-
-/*
- * to print name and filmtitle of Star Wars character in console
- * @param filmsOfCharacters: films in which Star Wars character appeared
- * @param name: name of Star Wars characters
- */
-function getFilmTitle(filmsOfCharacters, name) {
-  console.group(name);
-  filmsOfCharacters.map(({ title }) => console.log(name, title));
-  console.groupEnd();
-}
+getCharactersAndFilms(API);
