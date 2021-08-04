@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <title>Closures</title>
+  </head>
+
+  <body>
+    <a href="/ejercicios/">Go back</a>
+    <p><em>Abre la consola</em></p>
+
+    <script>
+      //IIFE (Immediately-invoked function expressions)
+      (function () {
+        let color = "green";
+
+        function printColor() {
+          console.log(color);
+        }
+
+        printColor();
+      })();
+
+      //functions returning functions
+      function makeColorPrinter(color) {
+        let colorMessage = `The color is ${color}`;
+        return function () {
+          console.log(colorMessage);
+        };
+      }
+
+      let greenColorPrinter = makeColorPrinter("green");
+      console.log(greenColorPrinter); //ƒ () {console.log(colorMessage);}
+      console.log(greenColorPrinter()); // now line 26 prints "The color is green" and line 32 undefined
+
+      //private variables
+      const counter = {
+        count: 3,
+      };
+      console.log(counter.count); //3
+      counter.count = 99;
+      console.log(counter.count); //99
+
+      function makeCounter(n) {
+        //if I don`t want anyone to access it:
+        let count = n; //this is a private variable: the value cannot be read directly or modified directly,
+        //has to be done through a function that is in the object being returned => this is closure
+        return {
+          increase: function () {
+            count += 1;
+            return count;
+          },
+          decrease: function () {
+            count -= 1;
+            return count;
+          },
+          getCount: function () {
+            return count;
+          },
+        };
+      }
+
+      let counter2 = makeCounter(7);
+      console.log(`The count is: ${counter2.getCount()}`); //The count is: 7
+      counter2.increase();
+      console.log(`The count is: ${counter2.getCount()}`); //The count is: 8
+      counter2.decrease();
+      counter2.decrease();
+      console.log(`The count is: ${counter2.getCount()}`); //The count is: 6
+
+      counter2.count = 0;
+      console.log(`The count is: ${counter2.getCount()}`); //counter2.count = 0; is not possible, doesn`t have any impact => its still "The count is: 6"
+    </script>
+  </body>
+</html>
