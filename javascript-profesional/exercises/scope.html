@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scope</title>
+  </head>
+  <body>
+    <a href="/exercises/">Go back</a>
+    <p><em>Open the console</em></p>
+    <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
+    <!-- now jQuery is globally available -->
+    <script>
+      //Global scope
+      var message = "Hello Platzi";
+      /*       global => if writing in console window.message => "Hello Platzi"
+      window is our global scope */
+
+      var $ = function (message) {
+        console.log(`say: ${message}`);
+      };
+
+      //Function scope
+
+      function printNumbers() {
+        for (var i = 0; i < 10; i++) {
+          setTimeout(function () {
+            console.log(i); // prints 10 ten times instead of 0 1 2 3 ...
+          }, 1000);
+        }
+      }
+      printNumbers();
+
+      function printNumbers2() {
+        for (var i = 0; i < 10; i++) {
+          function eventuallyPrintNumber(n) {
+            // use the function scope to get expected output
+            setTimeout(() => {
+              console.log(n); // prints 0 1 2 3 ...
+            }, 1000);
+          } //we want to call this function after each loop
+          eventuallyPrintNumber(i);
+        }
+      }
+      printNumbers2();
+
+      //Block scope
+
+      //difference between let and var: let operates on the block scope
+
+      function printNumbers3() {
+        for (let i = 0; i < 10; i++) {
+          setTimeout(() => {
+            console.log(i); // prints 0 1 2 3 ...
+          }, 1000);
+        }
+      }
+      printNumbers3();
+      //Module scope
+    </script>
+  </body>
+</html>
