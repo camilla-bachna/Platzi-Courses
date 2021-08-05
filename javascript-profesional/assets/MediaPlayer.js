@@ -49,5 +49,13 @@ MediaPlayer.prototype.toggleMute = function () {
   this.media.muted = !this.media.muted;
 };
 
+MediaPlayer.prototype.volumeUp = function () {
+  this.media.volume += 0.05;
+};
+
+MediaPlayer.prototype.volumeDown = function () {
+  this.media.volume -= 0.05;
+};
+
 export default MediaPlayer;
 /* export const foo = "bar"; */
