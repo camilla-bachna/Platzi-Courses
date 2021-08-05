@@ -8,7 +8,17 @@ function MediaPlayer(config) {
   this.media = config.el;
   // console.log(this); MediaPlayer, this.media inside is like MediaPlayer.media outside this function
   // console.log(this.media); <video class="movie"><source...></video>
+  this.plugins = config.plugins || [];
+  //initialize
+  this._initPlugins();
 }
+
+MediaPlayer.prototype._initPlugins = function () {
+  //user has control if he whats to play video, exception: autoplay is possible when mute
+  this.plugins.forEach((plugin) => {
+    plugin.run(this);
+  });
+};
 
 //play => we could name it anything
 MediaPlayer.prototype.play = function () {
@@ -25,6 +35,18 @@ MediaPlayer.prototype.pause = function () {
 MediaPlayer.prototype.togglePlay = function () {
   //HTMLMediaElement.paused: A boolean value. true is paused and false is not paused
   this.media.paused ? this.media.play() : this.media.pause();
+};
+
+MediaPlayer.prototype.mute = function () {
+  this.media.muted = true;
+};
+
+MediaPlayer.prototype.unmute = function () {
+  this.media.muted = false;
+};
+
+MediaPlayer.prototype.toggleMute = function () {
+  this.media.muted = !this.media.muted;
 };
 
 export default MediaPlayer;
