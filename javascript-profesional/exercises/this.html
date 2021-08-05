@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>this</title>
+  </head>
+  <body>
+    <a href="/exercises/">Go back</a>
+    <p><em>Open the console</em></p>
+    <p>
+      this refers to an object. This object is the one that is currently
+      executing a piece of code.
+    </p>
+    <script>
+      //this in global scope
+      console.log(`this: ${this}`); //this: [object Window]
+      //this in function scope
+      function whoIsThis() {
+        return this;
+      }
+      console.log(`whoIsThis(): ${whoIsThis()}`); //whoIsThis(): [object Window]
+      //this in function scope in strict mode - "use strict";
+
+      function whoIsThisStrict() {
+        "use strict"; //the strict mode is only in this function: to avoid errors
+        return this;
+      }
+      console.log(`whoIsThisStrict(): ${whoIsThisStrict()}`); //whoIsThisStrict(): undefined
+      //this in context of an object
+      const person = {
+        name: "Gabriel",
+        greet: function () {
+          console.log(`Hola mi nombre es ${this.name}`); //refers to the object (person: console.log(this); {name: "Gabriel", greet: ƒ})
+        },
+      };
+
+      console.log(`person.greet: ${person.greet}`); //person.greet: function () {console.log(`Hola mi nombre es ${this.name}`);}
+      console.log(`person.greet: ${person.greet()}`); //call the function: Hola mi nombre es Gabriel L35, person.greet: undefined L40
+      person.greet(); //Hola mi nombre es Gabriel L35
+
+      //this when we take a function out of an object
+      const action = person.greet;
+      action(); //Hola mi nombre es L35 the value this.name doesn´t exist
+
+      //this in context of a "class"
+      //this is like a constructor
+      function Person(name) {
+        //this = {} all functions have a value this, an empty object at the beginning
+        this.name = name;
+      }
+      Person.prototype.greet = function () {
+        console.log(`Hola, me llamo ${this.name}`);
+      };
+      //create an instance of the object
+      //In the context of objects that were instantiated from a class, this will refer to the instance of this object => refers to angela
+      //angela is the object that is executing greet
+      const angela = new Person("Angela");
+      angela.greet(); //Hola, me llamo Angela
+    </script>
+  </body>
+</html>
