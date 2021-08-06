@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Function.prototype.call, Function.prototype.bind, Function.prototype.apply
+    </title>
+  </head>
+  <body>
+    <a href="/exercises/">Go back</a>
+    <p><em>Open the console</em></p>
+    <ul>
+      <li><button class="call-to-action">Aprender</button></li>
+      <li><button class="call-to-action">Aprender Más</button></li>
+      <li><button class="call-to-action">!Nunca parar a Aprender!</button></li>
+    </ul>
+    <script>
+      //set this using "call"
+      function greet() {
+        console.log(`Soy ${this.name} ${this.surname}`);
+      }
+      const richard = {
+        name: "Richard",
+        surname: "Müller",
+      };
+      greet.call(richard); //we establish that this will be richard: Soy Richard Müller
+
+      //set this using "call" and pass arguments to the function
+      function walk(meters, direction) {
+        console.log(`${this.name} camina ${meters} metros hacia ${direction}.`);
+      }
+
+      walk.call(richard, 400, "norte"); //Richard  camina 400 metros hacia norte.
+
+      //set this using "apply" and pass arguments to the function
+      //same functionality as call
+
+      walk.apply(richard, [800, "noreste"]); //Richard  camina 800 metros hacia noreste.
+      /* const values = [800, "noreste"];
+      walk.apply(richard, values); */
+
+      /* To remember syntax:
+      C: Call - comma
+      A: Apply - array */
+
+      //set this in a new function using "bind"
+      /* bind does not execute the function, it returns a new function with the new this integrated */
+      const daniel = {
+        name: "Daniel",
+        surname: "Sánchez",
+      };
+      const danielGreet = greet.bind(daniel);
+      danielGreet(); //Soy Daniel Sánchez
+
+      const danielWalk = walk.bind(daniel);
+      danielWalk(1000, "este"); //Daniel camina 1000 metros hacia este.
+
+      const danielWalk2 = walk.bind(daniel, 200, "sur");
+      danielWalk2(); //Daniel camina 200 metros hacia sur
+
+      //Function currying
+
+      const danielWalk3 = walk.bind(daniel, 300);
+      danielWalk3("sureste"); //Daniel camina 300 metros hacia sureste.
+
+      //when is it useful to use one of these methods
+      const buttons = document.getElementsByClassName("call-to-action");
+      console.log(buttons); //HTMLCollection(3) [button.call-to-action, button.call-to-action, button.call-to-action]
+
+      //NodeList - forEach is a property of prototype so we can change this using call
+      // call the function: Array.prototype.forEach using buttons as a context, as this
+      //and buttons has a property buttons.length
+      Array.prototype.forEach.call(buttons, (button) => {
+        button.onclick = () => alert("Nunca pares de aprender!");
+      });
+
+      //Other version 2
+      /*     [...buttons].forEach((el) => {
+        el.onclick = () => {
+          alert("Nunca pares de aprender!");
+        };
+      }); */
+
+      //Other version 3
+      /* const buttons = document.querySelectorAll(".call-to-action");
+      console.log(buttons); //NodeList(3) [button.call-to-action, button.call-to-action, button.call-to-action]
+      buttons.forEach((button) => {
+        button.onclick = () => alert("Nunca pares de aprender!!!!!!!!");
+      }); */
+    </script>
+  </body>
+</html>
