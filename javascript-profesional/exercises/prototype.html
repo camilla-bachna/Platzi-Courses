@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prototype</title>
+  </head>
+  <body>
+    <a href="/exercises/">Go back</a>
+    <p><em>Open the console</em></p>
+    <script>
+      //an ordinary object
+      const zelda = {
+        name: "Zelda",
+      };
+
+      zelda.greet = function () {
+        console.log(`Hola soy ${this.name}`);
+      };
+
+      zelda.greet(); //Hola soy Zelda
+
+      //another object
+      const link = {
+        name: "Link",
+      };
+
+      link.greet = function () {
+        console.log(`Hola soy ${this.name}`);
+      };
+
+      link.greet(); //Hola soy Link
+
+      //lets be a bit more efficient
+      function Hero(name) {
+        const hero = {
+          name: name,
+        };
+
+        hero.greet = function () {
+          console.log(`Hola soy ${this.name}`);
+        };
+
+        return hero;
+      }
+
+      const zelda2 = Hero("Zelda");
+      zelda2.greet(); //Hola soy Zelda
+
+      const link2 = Hero("Link");
+      link2.greet(); //Hola soy Link
+
+      //make it even better and avoid creating the same function each time
+      const heroMethods = {
+        greet: function () {
+          console.log(`Hola me llamo ${this.name}`);
+        },
+      };
+
+      function Hero2(name) {
+        const hero = {
+          name: name,
+        };
+
+        hero.greet = heroMethods.greet;
+        return hero;
+      }
+
+      const zelda3 = Hero2("Zelda");
+      zelda3.greet(); //Hola me llamo Zelda
+
+      const link3 = Hero2("Link");
+      link3.greet(); //Hola me llamo Link
+
+      //Object.create
+      //const createNewObject = Object.create(object);
+      const heroMethods2 = {
+        greet: function () {
+          console.log(`Soy superheroe: ${this.name}`);
+        },
+      };
+
+      function Hero3(name) {
+        const hero = Object.create(heroMethods2);
+        hero.name = name;
+        return hero;
+      }
+
+      const zelda4 = Hero3("Zelda");
+      zelda4.greet(); //Soy superheroe: Zelda
+
+      const link4 = Hero3("Link");
+      link4.greet(); //Soy superheroe: Link
+
+      //the methods of hero inside of Hero
+
+      function Hero4(name) {
+        const hero = Object.create(Hero4.prototype);
+        hero.name = name;
+        return hero;
+      }
+
+      Hero4.prototype; // is an empty object {constructor: ƒ} constructor: ƒ Hero(name) [[Prototype]]: Object, we can add new properties
+      Hero4.prototype.greet = function () {
+        console.log(`Soy superheroe ${this.name}`);
+      };
+
+      const zelda5 = Hero4("Zelda");
+      zelda5.greet(); //Soy superheroe Zelda
+
+      const link5 = Hero4("Link");
+      link5.greet(); //Soy superheroe Link
+
+      //new is a shortcut to bring Hero.prototype to the object
+      //new is syntactic sugar, we no longer have to use Object.create or return the Hero function
+      function Hero5(name) {
+        //this = Object.create(Hero5.prototype); happens automatically
+        this.name = name;
+        //return this; happens implicitly
+      }
+
+      Hero5.prototype.greet = function () {
+        console.log(`New ${this.name}`);
+      };
+
+      const zelda6 = new Hero5("Zelda");
+      zelda6.greet(); //New Zelda
+
+      const link6 = new Hero5("Link");
+      link6.greet(); //New Link
+    </script>
+  </body>
+</html>

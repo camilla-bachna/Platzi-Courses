@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prototypal inheritance</title>
+  </head>
+  <body>
+    <a href="/exercises/">Go back</a>
+    <p><em>Open the console</em></p>
+    <p>
+      SomeObject.prototype es un objecto donde definimos el prototipo de las
+      instancias de SomeObject. Es decir, las instancias de SomeObject van a
+      heredar de SomeObject.prototype.
+    </p>
+    <p>
+      SomeObject.[[Prototype]] es el prototipo de SomeObject. Es decir,
+      SomeObject hereda de SomeObject.prototype.
+    </p>
+    <script>
+      function Hero(name) {
+        this.name = name;
+      }
+
+      Hero.prototype.greet = function () {
+        console.log(`Hola, soy ${this.name}`);
+      };
+
+      const zelda = new Hero("Zelda");
+
+      //properties of the instance
+      console.log("Name:", zelda.name); //Name: Zelda
+
+      //properties of the class
+      console.log("Greet:", zelda.greet); //Greet: ƒ () {console.log(`Hola, soy ${this.name}`); }
+
+      //inherited properties e.g. toString (come from Object)
+      console.log("toString:", zelda.toString); //toString: ƒ toString() { [native code] }
+
+      //hasOwnProperty (where does e.g. toString come from?)
+      //This is used to inspect whether something belongs directly to an object or whether it is borrowed through inheritance.
+      console.log(
+        `zelda.hasOwnProperty("name"):`,
+        zelda.hasOwnProperty("name")
+      ); //zelda.hasOwnProperty("name"): true
+
+      console.log(
+        `zelda.hasOwnProperty("greet"):`,
+        zelda.hasOwnProperty("greet")
+      ); //zelda.hasOwnProperty("greet"): false
+
+      console.log(zelda); //Hero {name: "Zelda"} comes from Hero, this is the object that created zelda [[Prototype]]: Object
+      //inside is another [[Prototype]]: Object and inside you can find hasOwnProperty: ƒ hasOwnProperty() and toString: ƒ toString()
+
+      //inspect the prototype of Zelda
+      console.log(zelda.__proto__); //{greet: ƒ, constructor: ƒ}
+      /* that __proto__ property is something that can vary, it is not something that is specified in the language,
+      it is an implementation detail imposed by browsers, Node.js or any other environment */
+
+      console.log(Object.getPrototypeOf(zelda)); //{greet: ƒ, constructor: ƒ} the correct way
+      const prototypeOfZelda = Object.getPrototypeOf(zelda);
+      console.log(prototypeOfZelda === Hero.prototype); //true because these objects are identical, even the same place in memory, its the same object, not a copy
+
+      //inspect the prototype of Hero
+      //add a new method
+      console.log(
+        (Hero.prototype.fight = function () {
+          console.log("FIGHT");
+        })
+      ); //ƒ () {console.log("FIGHT");}
+
+      //as we saw before its the same object so:
+      zelda.fight(); //in console is FIGHT
+      console.log(zelda.hasOwnProperty("fight")); //false, belongs to prototype
+      /* What does the language then do to find it? It says: does zelda.__proto__.fight exist? It doesn't exist,
+      ok, that's fine, let's look in your proto. does zelda.__proto__.fight exist? Yes, it exists. Let's run it, very good. */
+      console.log(zelda.toString()); //[object Object] is a native implementation
+
+      console.log(prototypeOfZelda.hasOwnProperty("toString")); //false
+
+      const prototypeOfprototypeOfZelda = Object.getPrototypeOf(Hero.prototype);
+
+      console.log(prototypeOfprototypeOfZelda); //{constructor: ƒ, __defineGetter__: ƒ, __defineSetter__: ƒ, hasOwnProperty: ƒ, __lookupGetter__: ƒ, …}
+
+      console.log(prototypeOfprototypeOfZelda.hasOwnProperty("toString")); //true, it is in the prototype of the prototype
+
+      console.log(zelda.bestFriend); //undefined because it is not in zelda, or Hero.prototype or prototype of prototype
+
+      //inspect the prototype of Object
+      //what is the prototype of the prototype => Object => ƒ Object() { [native code] }
+      //Object is the starting point for all, all, all objects in JavaScript including functions (functions are also objects in JS).
+      console.log(Object.hasOwnProperty("bestFriend")); //false
+
+      const prototypeOfObject = Object.getPrototypeOf(Object.prototype);
+      console.log(prototypeOfObject); //null Object doesnt`t have a prototype
+    </script>
+  </body>
+</html>
