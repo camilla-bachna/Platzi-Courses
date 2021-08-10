@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <title>Proxy</title>
+  </head>
+
+  <body>
+    <a href="/ejercicios/">Go back</a>
+    <p><em>Abre la consola</em></p>
+
+    <script src="https://unpkg.com/fast-levenshtein@2.0.6/levenshtein.js"></script>
+    <script>
+      // Just like getters and setters we can intercept some calls to an object.
+      // However, beyond get and set we can intercept many, many other things.
+      // Here you are going to find get and set, we say they are traps.
+      // When there is a call, the call is going to fall into these traps and we have them defined.
+
+      // Let's create an example where we intercept calls to read a property.
+      // If the property exists, we return it
+      // If it doesn't exist, then we suggest one that might work.
+
+      // For that we'll use an algorithm called Levenshtein. (e.g. window.Levenshtein.get("JavaScript", "JavaScripd"): distance 1)
+
+      const target = {
+        red: "Rojo",
+        green: "Verde",
+        blue: "Azul",
+      };
+
+      const handler = {
+        get(obj, prop) {
+          //obj represents the target, prop the property you are trying to read
+          if (prop in obj) {
+            return obj[prop];
+          }
+          const suggestion = Object.keys(obj).find((key) => {
+            //if the distance is less or equals 3
+            return Levenshtein.get(key, prop) <= 3;
+          });
+
+          if (suggestion) {
+            console.log(
+              `${prop} no se encontró. Quisiste decir ${suggestion}?`
+            );
+          }
+          return obj[prop];
+        },
+      };
+
+      const p = new Proxy(target, handler); //we want to intercept the target
+
+      console.log(p.red); //Rojo
+      console.log(p.greeen); //greeen no se encontró. Quisiste decir green?
+      //This proxy could be used in maybe an API that we expose in some library program we are working on,
+      // so we help developers to be able to find the value they were looking for. Just like git or npm did.
+    </script>
+  </body>
+</html>
