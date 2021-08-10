@@ -1,0 +1,54 @@
+><!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const person = {
+        firstName: "Camilla",
+        lastName: "Bachna",
+      };
+      console.log(`${person.firstName} ${person.lastName}`);
+      /* Problem with this approach: maybe there are multiple places in application where we want to display someones full name.
+            With this approach we have to repeat this template literal */
+
+      const person2 = {
+        firstName: "Camilla",
+        lastName: "Bachna",
+        fullName() {
+          //inside object drop function keyword
+          return `${person2.firstName} ${person2.lastName}`;
+        },
+      };
+      console.log(person2.fullName());
+      /* Better: define a method in object. Problem with this approach: this is read only,
+      meaning we cannot set a persons fullName from the outside, plus it would be nicer if we could tread this as a property
+      and drop the () */
+
+      const person3 = {
+        firstName: "Camilla",
+        lastName: "Bachna",
+        get fullName() {
+          return `${person3.firstName} ${person3.lastName}`;
+        },
+        set fullName(value) {
+          //this method needs a parameter and the value would be what we have on the right side of the assignment operator ("John Smith")
+          const parts = value.split(" ");
+          this.firstName = parts[0];
+          this.lastName = parts[1];
+        },
+      };
+
+      person3.fullName = "John Smith";
+      console.log(person3); //firstName: "John" fullName: "John Smith" lastName: "Smith"
+
+      /* we use getters to access properties in an object (fullName without ()) and setters to change or mutate them
+      (set fullName from outside).
+      Like this firsName and lastName are updated */
+    </script>
+  </body>
+</html>

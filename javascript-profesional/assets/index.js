@@ -14,9 +14,7 @@ const buttonVolumeDown = document.querySelector(".volume-down");
 e.g. new MediaPlayer({ element: video, title: "My favorite video", autoplay: true }); */
 const player = new MediaPlayer({
   el: video,
-  plugins: [
-    //new AutoPlay()
-  ],
+  plugins: [new AutoPlay()],
 }); //AutoPlay is a plugin, a plugin is a class, instantiate it
 
 buttonPlay.onclick = () => player.togglePlay(); //start / pause video when clicking on button

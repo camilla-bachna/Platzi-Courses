@@ -15,8 +15,32 @@ function MediaPlayer(config) {
 
 MediaPlayer.prototype._initPlugins = function () {
   //user has control if he whats to play video, exception: autoplay is possible when mute
-  this.plugins.forEach((plugin) => {
+  /* Right now we are passing this on to all plugins. 
+  But I like to have control over how much data I'm passing to the plugins. 
+  Maybe I don't want them to have access to the whole player, but only to a single set of its functionality 
+  virtual properties don`t exist directly */
+  /* this.plugins.forEach((plugin) => {
     plugin.run(this);
+  }); */
+  const player = {
+    play: () => this.play(),
+    pause: () => this.pause(),
+    media: this.media,
+    get muted() {
+      return this.media.muted;
+    },
+    set muted(value) {
+      this.media.muted = value;
+      /*  if (value === true) {
+        this.media.muted = true;
+      } else {
+        this.media.muted = false;
+      } */
+    },
+  };
+
+  this.plugins.forEach((plugin) => {
+    plugin.run(player); //like this none of the plugins will have access to togglePlay, mute, unmute, toggleMute etc
   });
 };
 
