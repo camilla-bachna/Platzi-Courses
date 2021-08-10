@@ -1,0 +1,147 @@
+<html>
+  <head>
+    <title>Promises</title>
+  </head>
+
+  <body>
+    <a href="/ejercicios/">Go back</a>
+
+    <ul>
+      <li><button id="sequence">Get Top Movies in Sequence</button></li>
+      <li><button id="parallel">Get Top Movies in Parallel</button></li>
+      <li><button id="fastest">Get Fastest Top Movie</button></li>
+    </ul>
+
+    <ul id="movies"></ul>
+
+    <script>
+      // Example: renderMovies([{ title: "Spider-Man", release_date: "2019-06-30", poster_path: "/rjbNpRMoVvqHmhmksbokcyCr7wn.jpg" }])
+      // Translate functions from using thens to using async/await
+      // Create a function so that we do not spend the amount of requests too quickly.
+      // Create function where we make sequential requests
+      // Create function where we make requests in parallel
+      // Create function where we get the first request that arrives
+
+      // The Movie Database API: https://developers.themoviedb.org/3/getting-started/introduction
+      const apiKey = "b89fc45c2067cbd33560270639722eae";
+
+      /* async / await is just syntax sugar build on top of promises, cannot be used with plain callbacks.
+      GetMovie is going to give us all the details of a film */
+      async function getMovie(id) {
+        const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+        return data;
+      }
+
+      async function getPopularMovies() {
+        const url = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${apiKey}`;
+        /* fetch will return a promise that resolves to a response */
+        const response = await fetch(url);
+        /* convert into json, this also will return a promise */
+        const data = await response.json();
+        return data.results;
+      }
+
+      /* convert functions from using then to async / await
+      more expressive, it's going to read better and easier to debug and to maintain.
+      n by default is 3, can change that when calling function */
+      async function getTopMoviesIds(n = 3) {
+        // return getPopularMovies().then((popularMovies) =>
+        //   popularMovies.slice(0, n).map((movie) => movie.id)
+        // );
+        try {
+          /* We have to wait for the value of this promise to be resolved, popularMovies = array of movies */
+          const popularMovies = await getPopularMovies();
+          const ids = popularMovies.slice(0, n).map((movie) => movie.id);
+          return ids;
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
+
+      getTopMoviesIds(2).then((ids) => console.log(ids)); //(2) [451048, 497698]
+
+      function renderMovies(movies) {
+        const movieList = document.getElementById("movies");
+        movieList.innerHTML = "";
+
+        movies.forEach((movie) => {
+          const listItem = document.createElement("li");
+          listItem.innerHTML = `
+            <img src="https://image.tmdb.org/t/p/w342${movie.poster_path}" />
+            <h5>${movie.title}</h5>
+            <p>Released on <em>${movie.release_date}</em></p>
+            `;
+
+          movieList.appendChild(listItem);
+        });
+      }
+      /* execute function in sequence */
+      async function getTopMoviesInSequence() {
+        try {
+          const ids = await getTopMoviesIds();
+          // console.log(ids); (3) [497698, 451048, 385128]
+          const movies = [];
+
+          for (const id of ids) {
+            const movie = await getMovie(id);
+            //console.log(movie); same as console.log(data L 34)
+            movies.push(movie);
+          }
+          return movies; //(3) [{…}, {…}, {…}]
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
+
+      /* Making this function sequential is not ideal for this situation.
+      There are times when we want to fetch one data, one request at the same time.
+      execute function in parallel with Promise.all()
+      That way, all three requests occur at the same time and return one next to the other,
+      instead of one and then the other and then the other.*/
+      async function getTopMoviesInParallel() {
+        try {
+          const ids = await getTopMoviesIds();
+          /* convert the ids in promises: getMovie is an async function and all async functions return a promise */
+          const moviePromises = ids.map((id) => getMovie(id));
+          /* Promise.all: is going to wait for all the promises to be resolved,
+          Promise.all also returns a promise with the values already resolved - so objects that represent these films.
+          If by chance any of the promises throws an error and all will throw an error. */
+          const movies = await Promise.all(moviePromises);
+          //console.log(movies);  [{…}, {…}, {…}]
+          return movies;
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
+
+      async function getFastestTopMovie() {
+        try {
+          const ids = await getTopMoviesIds();
+          const moviePromises = ids.map((id) => getMovie(id)); // we need the same list as in getTopMoviesInParallel
+          const movie = await Promise.race(moviePromises); //the first that gets resolved
+          return movie;
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
+
+      document.getElementById("sequence").onclick = async function () {
+        const movies = await getTopMoviesInSequence();
+        renderMovies(movies);
+      };
+
+      document.getElementById("parallel").onclick = async function () {
+        const movies = await getTopMoviesInParallel();
+        renderMovies(movies);
+      };
+
+      document.getElementById("fastest").onclick = async function () {
+        const movie = await getFastestTopMovie();
+        renderMovies([movie]); //renderMovies needs an array
+      };
+    </script>
+  </body>
+</html>

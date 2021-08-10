@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      async function getFoo(bar) {
+        const baz = 2 * bar;
+
+        const root = await asyncSqrt(baz);
+
+        return 2 * root;
+      }
+
+      // Is the same as
+
+      function getFoo(bar) {
+        return Promise.resolve().then(() => {
+          const baz = 2 * bar;
+
+          return asyncSqrt(baz).then((root) => {
+            return 2 * root;
+          });
+        });
+      }
+
+      // (Aside) It is not quite the same as
+
+      function getFoo(bar) {
+        const baz = 2 * bar;
+
+        return asyncSqrt(baz).then((root) => {
+          return 2 * root;
+        });
+      }
+
+      // because if 2 * bar threw an error, this function would throw an error,
+      // but the other functions would return a rejected promise.
+    </script>
+  </body>
+</html>
