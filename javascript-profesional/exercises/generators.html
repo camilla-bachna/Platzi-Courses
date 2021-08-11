@@ -4,7 +4,7 @@
   </head>
 
   <body>
-    <a href="/ejercicios/">Go back</a>
+    <a href="/exercises/">Go back</a>
     <p><em>Abre la consola</em></p>
 
     <script>
@@ -89,6 +89,8 @@
       //genFibonacci.next(); {value: 5, done: false}
       //genFibonacci.next(); {value: 8, done: false}
 
+      //delegate to other function
+
       function* generatorDelegation() {
         yield 1;
         yield* anotherGenerator(); //delegates to function anotherGenerator()
@@ -108,6 +110,20 @@
       //gen1.next().value;  10
       //gen1.next().value;  15
       //gen1.next().value;  2
+
+      //create random number
+      function* randomNumbers() {
+        let num;
+        while (true) {
+          yield (num = Math.floor(Math.random() * (10 - 1) + 1));
+        }
+      }
+      const genNumbers = randomNumbers();
+
+      //genNumbers.next();  {value: 8, done: false}
+      //genNumbers.next();  {value: 4, done: false}
+      //genNumbers.next();  {value: 9, done: false}
+      //genNumbers.next();  {value: 1, done: false}
     </script>
   </body>
 </html>
