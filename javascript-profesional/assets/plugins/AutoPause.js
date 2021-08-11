@@ -3,11 +3,12 @@ class AutoPause {
     we have to create a constructor and define what the threshold is going to do.
  */
   constructor() {
-    //is less then 25% of the screen stop video
+    //is less than 25% of the screen stop video
     this.threshold = 0.25;
     //set this permanently on the instance of the object.
     //now, whenever the function handleIntersection() is called, this is going to refer to the plugin instance
     this.handleIntersection = this.handleIntersection.bind(this);
+    this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
   }
 
   run(player) {
@@ -25,6 +26,8 @@ class AutoPause {
 
     //observe media element and container is whole screen
     observer.observe(this.player.media);
+
+    document.addEventListener("visibilitychange", this.handleVisibilityChange);
   }
 
   handleIntersection(entries) {
@@ -35,6 +38,18 @@ class AutoPause {
     if we move screen up and down we see warnings
      */
     const isVisible = entry.intersectionRatio >= this.threshold;
+    if (isVisible) {
+      this.player.play();
+    } else {
+      this.player.pause();
+    }
+  }
+
+  //if we move to another tab stop video, if we come back continue
+  //if the video is not mute and you change tab, you can see a small icon that disappears and sound stops
+  handleVisibilityChange() {
+    const isVisible = document.visibilityState === "visible";
+
     if (isVisible) {
       this.player.play();
     } else {
