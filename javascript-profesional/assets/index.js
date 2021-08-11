@@ -2,6 +2,7 @@
 
 import MediaPlayer from "./MediaPlayer.js"; //import MediaPlayer, { foo } from "./MediaPlayer";
 import AutoPlay from "./plugins/AutoPlay.js";
+import AutoPause from "./plugins/AutoPause.js";
 
 const video = document.querySelector(".movie");
 const buttonPlay = document.querySelector(".play-pause");
@@ -14,8 +15,8 @@ const buttonVolumeDown = document.querySelector(".volume-down");
 e.g. new MediaPlayer({ element: video, title: "My favorite video", autoplay: true }); */
 const player = new MediaPlayer({
   el: video,
-  plugins: [new AutoPlay()],
-}); //AutoPlay is a plugin, a plugin is a class, instantiate it
+  plugins: [new AutoPlay(), new AutoPause()],
+}); //AutoPlay and AutoPause are plugins, a plugin is a class, instantiate it
 
 buttonPlay.onclick = () => player.togglePlay(); //start / pause video when clicking on button
 video.onclick = () => player.togglePlay(); //start / pause video when clicking on video
