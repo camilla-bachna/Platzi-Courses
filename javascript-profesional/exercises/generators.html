@@ -1,0 +1,113 @@
+<html>
+  <head>
+    <title>Generators</title>
+  </head>
+
+  <body>
+    <a href="/ejercicios/">Go back</a>
+    <p><em>Abre la consola</em></p>
+
+    <script>
+      // Generators are functions that can be exited and re-entered; we can start and stop their execution
+      // Generators are suited for creating efficient functions in memory.
+      // Their context (variable association) will be preserved between re-entries.
+      // Each time we call next, the execution of the generator will continue until the next yield.
+
+      function* simpleGenerator() {
+        console.log("Generator start");
+        yield 1;
+        yield 2;
+        yield 3;
+        console.log("Generator end");
+      }
+
+      const gen = simpleGenerator();
+
+      // gen.next(); Generator start {value: 1, done: false}
+      // gen.next(); {value: 2, done: false}
+      // gen.next(); {value: 3, done: false}
+      // gen.next(); Generator end {value: undefined, done: true}
+
+      // We can make infinite generators.
+      function* idMaker() {
+        let id = 1;
+        //while (true) normally is very dangerous because its blocking the thread
+        //but in this case with the yield will stop, return the value that is there and true will not continue
+        while (true) {
+          yield id;
+          id += 1;
+        }
+      }
+
+      const genId = idMaker();
+
+      //genId.next(); {value: 1, done: false}
+      //genId.next(); {value: 2, done: false}
+      //genId.next(); {value: 3, done: false}
+      //genId.next(); {value: 4, done: false} ...will never end, but the thread does not not get blocked
+
+      // When we call next we can also pass values that the function receives.
+      function* idMakerWithReset() {
+        let id = 1;
+        let reset;
+        while (true) {
+          reset = yield id;
+          if (reset) {
+            id = 1;
+          } else {
+            id += 1;
+          }
+        }
+      }
+
+      const genIdWithReset = idMakerWithReset();
+
+      //genIdWithReset.next(); {value: 1, done: false}
+      //genIdWithReset.next(); {value: 2, done: false}
+      //genIdWithReset.next(); {value: 3, done: false}
+      //genIdWithReset.next(true); {value: 1, done: false} will set the reset value
+      //genIdWithReset.next(true); {value: 1, done: false}
+      //genIdWithReset.next(); {value: 2, done: false}
+
+      // Now let's do a slightly more complex example: the fibonacci sequence.
+      // The next number will always be the sum of the last two numbers.
+      function* fibonacci() {
+        let a = 1;
+        let b = 1;
+        while (true) {
+          const nextNumber = a + b;
+          a = b;
+          b = nextNumber;
+          yield nextNumber;
+        }
+      }
+
+      const genFibonacci = fibonacci();
+
+      //genFibonacci.next(); {value: 2, done: false}
+      //genFibonacci.next(); {value: 3, done: false}
+      //genFibonacci.next(); {value: 5, done: false}
+      //genFibonacci.next(); {value: 8, done: false}
+
+      function* generatorDelegation() {
+        yield 1;
+        yield* anotherGenerator(); //delegates to function anotherGenerator()
+        yield 2;
+      }
+
+      function* anotherGenerator() {
+        yield 5;
+        yield 10;
+        yield 15;
+      }
+
+      const gen1 = generatorDelegation();
+
+      //gen1.next().value;  1
+      //gen1.next().value;  5
+      //gen1.next().value;  10
+      //gen1.next().value;  15
+      //gen1.next().value;  2
+    </script>
+  </body>
+</html>
