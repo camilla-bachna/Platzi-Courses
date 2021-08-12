@@ -26,7 +26,7 @@ buttonMute.onclick = () => player.toggleMute();
 buttonVolumeUp.onclick = () => player.volumeUp();
 buttonVolumeDown.onclick = () => player.volumeDown();
 
-//this if will help us to detect if the user's browser supports the service Workers
+//this if will help us to detect if the user's browser supports the service workers
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/sw.js").catch((error) => {
     console.log(error.message);
