@@ -4,7 +4,7 @@
   "description": "Project of the Professional JavaScript Course of the Platzi JavaScript School.",
   "main": "index.js",
   "scripts": {
-    "start": "live-server"
+    "start": "parcel index.html exercises/index.html exercises/**/*.html"
   },
   "keywords": [
     "platzi"
@@ -12,6 +12,10 @@
   "author": "Camilla Bachna",
   "license": "MIT",
   "devDependencies": {
-    "live-server": "^1.2.1"
-  }
+    "parcel-bundler": "^1.12.5",
+    "typescript": "^4.3.5"
+  },
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
 }

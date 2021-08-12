@@ -18,7 +18,7 @@
 
       // Is the same as
 
-      function getFoo(bar) {
+      function getFoo2(bar) {
         return Promise.resolve().then(() => {
           const baz = 2 * bar;
 
@@ -30,7 +30,7 @@
 
       // (Aside) It is not quite the same as
 
-      function getFoo(bar) {
+      function getFoo3(bar) {
         const baz = 2 * bar;
 
         return asyncSqrt(baz).then((root) => {
