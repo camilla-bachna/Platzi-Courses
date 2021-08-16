@@ -40,14 +40,14 @@ async function precache() {
   //this gives us an instance of a cache (called v1, version one), returns a promise so await.
   const cache = await caches.open(VERSION);
   return cache.addAll([
-    "/", //this one is important
+    /*     "/", //this one is important
     "/index.html",
     "/assets/index.js",
     "/assets/MediaPlayer.js",
     "/assets/plugins/AutoPlay.js",
-    "/assets/plugins/AutoPause.js",
+    "/assets/plugins/AutoPause.ts",
     "/assets/index.css",
-    "/assets/BigBuckBunny.mp4",
+    "/assets/BigBuckBunny.mp4", */
   ]);
 }
 

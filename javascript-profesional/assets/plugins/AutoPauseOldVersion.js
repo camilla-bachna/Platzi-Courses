@@ -1,3 +1,5 @@
+import MediaPlayer from "../MediaPlayer";
+
 class AutoPause {
   /* since this.threshold will be a value, which we will use in const observer and in handleIntersection(),  
     we have to create a constructor and define what the threshold is going to do.
