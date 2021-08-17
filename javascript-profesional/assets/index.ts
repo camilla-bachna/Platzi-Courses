@@ -3,6 +3,7 @@
 import MediaPlayer from "./MediaPlayer"; 
 import AutoPlay from "./plugins/AutoPlay";
 import AutoPause from "./plugins/AutoPause";
+import Ads from "./plugins/Ads";
 
 const video: HTMLElement = document.querySelector(".movie");
 const buttonPlay: HTMLElement = document.querySelector(".play-pause");
@@ -12,7 +13,7 @@ const buttonVolumeDown: HTMLElement = document.querySelector(".volume-down");
 
 const player = new MediaPlayer({
   el: video,
-  plugins: [new AutoPlay(), new AutoPause()],
+  plugins: [new AutoPlay(), new AutoPause(), new Ads()],
 }); 
 
 buttonPlay.onclick = () => player.togglePlay(); 
