@@ -1,0 +1,10 @@
+//configuration file - probably this file is hidden
+
+{
+    "presets": [
+        "@babel/preset-env"
+    ], 
+    "plugins": [
+        "@babel/plugin-transform-runtime"
+    ]
+}
