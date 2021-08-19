@@ -17,6 +17,13 @@ module.exports = {
   resolve: {
     // Here we put the extensions that we will have in our project for webpack to read them, e.g. jsx (React).
     extensions: [".js"],
+    alias: {
+      //we have utils, templates, styles and images
+      "@utils": path.resolve(__dirname, "src/utils/"),
+      "@templates": path.resolve(__dirname, "src/templates/"),
+      "@styles": path.resolve(__dirname, "src/styles/"),
+      "@images": path.resolve(__dirname, "src/assets/images/"),
+    },
   },
   module: {
     rules: [
@@ -49,6 +56,7 @@ module.exports = {
           filename: "assets/fonts/[hash][ext][query]", // Output directory
         } /*  
         old version
+        attention when using alias change route
         test: /\.(woff|woff2)$/,
         use: {
           loader: "url-loader",
@@ -63,7 +71,7 @@ module.exports = {
             //respect the name and the extension it has
             name: "[name].[ext]",
             outputPath: "./assets/fonts",
-            publicPath: "./assets/fonts",
+            publicPath: "../assets/fonts",
             // we will not use it in our configuration
             // By default, modules are generated with ES syntax. To enable the use of common JS syntax, the value is false
             esModule: false,
