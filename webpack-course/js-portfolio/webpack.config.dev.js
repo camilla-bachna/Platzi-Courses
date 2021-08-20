@@ -2,10 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin"); //deconstructing the object that comes by default when you make require of 'clean-webpack-plugin'
 
 module.exports = {
   //entry point of our application
@@ -15,11 +12,10 @@ module.exports = {
     // path is where the folder will be where the files will be saved.
     // With path.resolve we can tell where the folder is going to be and the location of the folder.
     path: path.resolve(__dirname, "dist"),
-    //clean: true, webpack 5 without installing anything
     filename: "[name].[contenthash].js", //bundle, with contenthash show me what the hash of this build was
     assetModuleFilename: "assets/images/[hash][ext][query]",
   },
-  mode: "production",
+  mode: "development", //activate development modus
   resolve: {
     // Here we put the extensions that we will have in our project for webpack to read them, e.g. jsx (React).
     extensions: [".js"],
@@ -60,30 +56,7 @@ module.exports = {
         type: "asset/resource", // Type of module to use (the same can be used for image files)
         generator: {
           filename: "assets/fonts/[contenthash][ext][query]", // Output directory
-        } /*  
-        old version
-        attention when using alias change route
-        test: /\.(woff|woff2)$/,
-        use: {
-          loader: "url-loader",
-          options: {
-            // limit: when passed true/false, enables/disables base64 transformation
-            // when a number or string is given, indicates the maximum size of a file in bytes
-            limit: 10000,
-            //type of data we use, the characteristics our resources have - size and format type
-            //Multipurpose Internet Mail Extensions
-            //It is a label used to identify a type of data that is used so that the software knows how to work with that data. It serves the same purpose on the internet as file extensions (.txt, .docx, .xlsx) in Microsoft Windows.
-            mimetype: "application/font-woff",
-            //respect the name and the extension it has
-            name: "[name].[contenthash].[ext]",
-            outputPath: "./assets/fonts",
-            publicPath: "../assets/fonts",
-            // we will not use it in our configuration
-            // By default, modules are generated with ES syntax. To enable the use of common JS syntax, the value is false
-            esModule: false,
-          },
         },
-      }, */,
       },
     ],
   },
@@ -112,12 +85,5 @@ module.exports = {
       ],
     }),
     new Dotenv(),
-    new CleanWebpackPlugin(),
   ],
-  //optimization support
-  //compress final CSS files and minify
-  optimization: {
-    minimize: true,
-    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
-  },
 };
