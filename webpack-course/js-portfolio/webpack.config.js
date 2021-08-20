@@ -2,17 +2,19 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   //entry point of our application
   entry: "./src/index.js",
-  //where you are going to send what you are going to prepare webpacks to
+  //where you are going to send what you are going to prepare webpack to
   output: {
     // path is where the folder will be where the files will be saved.
     // With path.resolve we can tell where the folder is going to be and the location of the folder.
     path: path.resolve(__dirname, "dist"),
-    filename: "main.js", //bundle
+    filename: "[name].[contenthash].js", //bundle, with contenthash show me what the hash of this build was
     assetModuleFilename: "assets/images/[hash][ext][query]",
   },
   resolve: {
@@ -54,7 +56,7 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/i, // include font types
         type: "asset/resource", // Type of module to use (the same can be used for image files)
         generator: {
-          filename: "assets/fonts/[hash][ext][query]", // Output directory
+          filename: "assets/fonts/[contenthash][ext][query]", // Output directory
         } /*  
         old version
         attention when using alias change route
@@ -70,7 +72,7 @@ module.exports = {
             //It is a label used to identify a type of data that is used so that the software knows how to work with that data. It serves the same purpose on the internet as file extensions (.txt, .docx, .xlsx) in Microsoft Windows.
             mimetype: "application/font-woff",
             //respect the name and the extension it has
-            name: "[name].[ext]",
+            name: "[name].[contenthash].[ext]",
             outputPath: "./assets/fonts",
             publicPath: "../assets/fonts",
             // we will not use it in our configuration
@@ -95,7 +97,7 @@ module.exports = {
       filename: "./index.html",
     }),
     //new instance
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({ filename: "assets/[name].[contenthash].css" }),
     new CopyPlugin({
       patterns: [
         {
@@ -108,4 +110,10 @@ module.exports = {
     }),
     new Dotenv(),
   ],
+  //optimization support
+  //compress final CSS files and minify
+  optimization: {
+    minimize: true,
+    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
+  },
 };
