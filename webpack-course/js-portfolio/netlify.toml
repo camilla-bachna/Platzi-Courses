@@ -1,0 +1,3 @@
+[build]
+  publish = "dist" /// which will be the published folder 
+  command = "npm run build" //command to execute for the deploy

@@ -16,6 +16,7 @@ module.exports = {
     assetModuleFilename: "assets/images/[hash][ext][query]",
   },
   mode: "development", //activate development modus
+  watch: true,
   resolve: {
     // Here we put the extensions that we will have in our project for webpack to read them, e.g. jsx (React).
     extensions: [".js"],
