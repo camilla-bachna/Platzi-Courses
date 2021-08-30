@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = {
   //entry point of our application
@@ -16,7 +17,6 @@ module.exports = {
     assetModuleFilename: "assets/images/[hash][ext][query]",
   },
   mode: "development", //activate development modus
-  watch: true,
   resolve: {
     // Here we put the extensions that we will have in our project for webpack to read them, e.g. jsx (React).
     extensions: [".js"],
@@ -86,5 +86,15 @@ module.exports = {
       ],
     }),
     new Dotenv(),
+    new BundleAnalyzerPlugin(),
   ],
+  devServer: {
+    //dist because this is the folder where all our files are generated
+    static: path.join(__dirname, "dist"),
+    compress: true,
+    //when using HTML5 History API the index.html page will be displayed instead of a 404 response
+    historyApiFallback: true,
+    port: 3005,
+    open: true,
+  },
 };
