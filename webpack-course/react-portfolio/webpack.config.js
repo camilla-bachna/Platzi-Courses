@@ -52,11 +52,6 @@ module.exports = {
         generator: {
           filename: "assets/images/[contenthash][ext][query]",
         },
-        use: [
-          {
-            loader: "file-loader",
-          },
-        ],
       }, //for files with extension png, svg etc
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i, // include font types  extension woff or woff2
