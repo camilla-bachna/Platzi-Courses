@@ -1,5 +1,5 @@
 //implement the use state method
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 
 /* a React component declaration */
 class Stateful extends Component {
@@ -19,7 +19,7 @@ class Stateful extends Component {
 export default Stateful;
 
 /* Though props don't have a local state they can inherit state and life-cycle features using Hooks 
-
+import React, { useState } from "react";
 //a React stateless functional component
 const ExampleComponent = (props) => {
   const alertLocation = (event) => {
