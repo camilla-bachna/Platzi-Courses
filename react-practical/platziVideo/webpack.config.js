@@ -9,6 +9,7 @@ module.exports = {
     //resolve allows us to detect the directory we are in and we pass it a directory in which we will save the files
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
+    assetModuleFilename: "assets/[hash].[ext]",
   },
   resolve: {
     extensions: [".js", ".jsx"],
@@ -38,6 +39,10 @@ module.exports = {
           "css-loader",
           "sass-loader",
         ],
+      },
+      {
+        test: /\.(png|gif|jpg|svg)$/,
+        type: "asset/resource",
       },
     ],
   },
