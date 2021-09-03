@@ -8,12 +8,14 @@
         "build": "webpack --mode production",
         "start": "webpack-dev-server --open --mode development",
         "lint": "eslint --fix --ext .js,.jsx .",
-        "server": "json-server initialState.json"
+        "server": "json-server initialState.json",
+        "dev": "npm start & npm run server"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "prop-types": "^15.7.2",
         "react": "^17.0.2",
         "react-dom": "^17.0.2"
     },
