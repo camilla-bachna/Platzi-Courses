@@ -10,16 +10,17 @@ import "../assets/styles/App.scss";
 
 const API = "http://localhost:3000/initialState";
 
-const App = () => {
+const Home = () => {
   const initialState = useInitialState(API);
-  return (
-    /* initialState.length === 0 ? <h1>Loading...</h1>: ( like this initialState.mylist? etc is not necessary */
+  return initialState.length === 0 ? (
+    <h1>Loading...</h1>
+  ) : (
     <div className="App">
       <Header />
       <Search />
 
       {/* This way it first asks if initialState.mylist is undefined and if it is not then it asks if length is > 0. */}
-      {initialState.mylist?.length > 0 && (
+      {initialState.mylist.length > 0 && (
         <Categories title="Mi Lista">
           <Carousel>
             {initialState.mylist?.map((item) => (
@@ -31,7 +32,7 @@ const App = () => {
 
       <Categories title="Tendencias">
         <Carousel>
-          {initialState.trends?.map((item) => (
+          {initialState.trends.map((item) => (
             <CarouselItem key={item.id} {...item} />
           ))}
         </Carousel>
@@ -40,7 +41,7 @@ const App = () => {
       <Categories title="Originales de Platzi Video">
         <Carousel>
           {/* item is each object with info of movie (6) */}
-          {initialState.originals?.map((item) => (
+          {initialState.originals.map((item) => (
             <CarouselItem key={item.id} {...item} />
           ))}
         </Carousel>
@@ -51,4 +52,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;

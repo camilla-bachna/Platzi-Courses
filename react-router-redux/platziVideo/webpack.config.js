@@ -46,6 +46,9 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    historyApiFallback: true,
+  },
   //we pass it an object with the configuration we need
   plugins: [
     new HtmlWebpackPlugin({
