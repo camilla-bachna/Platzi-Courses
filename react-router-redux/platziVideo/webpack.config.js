@@ -47,6 +47,7 @@ module.exports = {
     ],
   },
   devServer: {
+    //allows to handle the browser
     historyApiFallback: true,
   },
   //we pass it an object with the configuration we need
