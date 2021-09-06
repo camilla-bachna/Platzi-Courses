@@ -1,12 +1,10 @@
 import React from "react";
-import Header from "../components/Header";
 import Search from "../components/Search";
 import Categories from "../components/Categories";
 import Carousel from "../components/Carousel";
 import CarouselItem from "../components/CarouselItem";
-import Footer from "../components/Footer";
 import useInitialState from "../hooks/useInitialState";
-import "../assets/styles/App.scss";
+import "../assets/styles/Home.scss";
 
 const API = "http://localhost:3000/initialState";
 
@@ -15,8 +13,7 @@ const Home = () => {
   return initialState.length === 0 ? (
     <h1>Loading...</h1>
   ) : (
-    <div className="App">
-      <Header />
+    <>
       <Search />
 
       {/* This way it first asks if initialState.mylist is undefined and if it is not then it asks if length is > 0. */}
@@ -46,9 +43,7 @@ const Home = () => {
           ))}
         </Carousel>
       </Categories>
-
-      <Footer />
-    </div>
+    </>
   );
 };
 

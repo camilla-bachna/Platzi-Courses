@@ -4,19 +4,22 @@ import Home from "../containers/Home";
 import Login from "../containers/Login";
 import Register from "../containers/Register";
 import NotFound from "../containers/NotFound";
+import Layout from "../components/Layout";
 
 //explicit return or default return because it contains only the visual part of project
 const App = () => (
   //will encapsulate each component
   <BrowserRouter>
-    <Switch>
-      {/* the root of our project */}
-      <Route exact path="/" component={Home} />
-      {/* exact route So when someone enters the slash login he will go directly there */}
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Register} />
-      <Route component={NotFound} />
-    </Switch>
+    <Layout>
+      <Switch>
+        {/* the root of our project */}
+        <Route exact path="/" component={Home} />
+        {/* exact route So when someone enters the slash login he will go directly there */}
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
+        <Route component={NotFound} />
+      </Switch>
+    </Layout>
   </BrowserRouter>
 );
 
