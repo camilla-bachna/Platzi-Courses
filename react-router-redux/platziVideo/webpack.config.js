@@ -47,6 +47,9 @@ module.exports = {
     ],
   },
   devServer: {
+    open: true,
+    hot: true,
+    port: 8081,
     //allows to handle the browser
     historyApiFallback: true,
   },

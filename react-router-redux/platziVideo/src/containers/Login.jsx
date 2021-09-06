@@ -14,7 +14,7 @@ const Login = () => (
           Iniciar sesión
         </button>
         <div className="login__container--remember-me">
-          <label>
+          <label htmlFor="cbox1">
             <input type="checkbox" id="cbox1" value="first_checkbox" />
             Recuérdame
           </label>
