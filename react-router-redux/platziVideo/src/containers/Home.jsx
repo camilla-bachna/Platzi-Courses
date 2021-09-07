@@ -11,7 +11,7 @@ import "../assets/styles/Home.scss";
 /* destructuring props */
 const Home = ({ mylist, trends, originals }) => {
   //const initialState = useInitialState(API);
-  /* And I'm not going to do a validation to see if I have or don't have data because I'm not going to use it any more, 
+  /* And I'm not going to do a validation to see if I have or don't have data because I'm not going to use it any more,
   because this data is already connected within our application.
   So, before I even render our application our Store is already ready to go */
   return (
@@ -56,6 +56,16 @@ const mapStateToProps = (state) => {
     originals: state.originals,
   };
 };
+
+/* or a bit cleaner:
+const mapStateToProps = ({mylist, trends, originals}) => {
+  return {
+    mylist,
+    trends,
+    originals,
+  };
+}; */
+
 /* mapStateToProps = map of props (is a function that will tell the provider what information we need from the store),
   null = dispatch (called mapDispatchToProps: is used for dispatching (= sending) actions to the store, is an object with the different functions to execute an action in Redux)
   = actions (the second parameter will allow us to map the actions that we are going to execute.
