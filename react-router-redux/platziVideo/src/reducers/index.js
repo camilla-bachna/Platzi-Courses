@@ -1,3 +1,4 @@
+/* initialize reducer */
 const reducer = (state, action) => {
   return state;
 };

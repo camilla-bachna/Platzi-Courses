@@ -12,7 +12,7 @@ const App = () => (
   <BrowserRouter>
     <Layout>
       <Switch>
-        {/* the root of our project */}
+        {/* the root of our project, the first rendering element of our application */}
         <Route exact path="/" component={Home} />
         {/* exact route So when someone enters the slash login he will go directly there */}
         <Route exact path="/login" component={Login} />
