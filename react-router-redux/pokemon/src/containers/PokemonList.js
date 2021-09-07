@@ -7,6 +7,9 @@ import "../App.css";
 import ReactPaginate from "react-paginate";
 
 const PokemonList = (props) => {
+  /* React Redux provides a pair of custom React hooks that allow your React components to interact with the Redux store.
+  useSelector reads a value from the store state and subscribes to updates,
+  while useDispatch returns the store's dispatch method to let you dispatch actions. */
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
 
