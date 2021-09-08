@@ -21,8 +21,9 @@ const Home = ({ mylist, trends, originals }) => {
       {mylist.length > 0 && (
         <Categories title="Mi Lista">
           <Carousel>
+            {/* like this isList is true, if you want it to be false: isList={false} */}
             {mylist.map((item) => (
-              <CarouselItem key={item.id} {...item} />
+              <CarouselItem key={item.id} {...item} isList />
             ))}
           </Carousel>
         </Categories>

@@ -11,8 +11,8 @@ export const setFavorite = (payload) => ({
 
 /* describe what we are going to do
 returning an object with type and payload
-payload: which would be the information that we are going to transmit to it
-type: the name that we're going to identify this description of what we're doing */
+type: the name that we're going to identify this description of what we're doing
+payload: which would be the information that we are going to transmit to it */
 export const deleteFavorite = (payload) => ({
   type: actions.deleteFavorite,
   payload,
