@@ -2,6 +2,7 @@
 export const actions = {
   setFavorite: "SET_FAVORITE",
   deleteFavorite: "DELETE_FAVORITE",
+  loginRequest: "LOGIN_REQUEST",
 };
 
 export const setFavorite = (payload) => ({
@@ -15,5 +16,10 @@ type: the name that we're going to identify this description of what we're doing
 payload: which would be the information that we are going to transmit to it */
 export const deleteFavorite = (payload) => ({
   type: actions.deleteFavorite,
+  payload,
+});
+
+export const loginRequest = (payload) => ({
+  type: actions.loginRequest,
   payload,
 });
