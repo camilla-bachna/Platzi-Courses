@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 
 const Login = (props) => {
   const [form, setValues] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -73,6 +74,13 @@ const Login = (props) => {
       <section className="login__container">
         <h2>Inicia sesión</h2>
         <form className="login__container--form" onSubmit={handleSubmit}>
+          <input
+            name="name"
+            className="input"
+            type="text"
+            placeholder="Nombre"
+            onChange={handleInput}
+          />
           <input
             name="email"
             className="input"

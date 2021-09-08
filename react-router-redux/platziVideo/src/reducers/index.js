@@ -35,6 +35,9 @@ const reducer = (state, action) => {
       And like this I am already assigning the elements to user */
       return { ...state, user: action.payload };
 
+    case actions.logoutRequest:
+      return { ...state, user: action.payload };
+
     default:
       return state;
   }
