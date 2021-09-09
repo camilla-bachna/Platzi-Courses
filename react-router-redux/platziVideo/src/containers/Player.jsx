@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getVideoSource } from "../actions";
+import PropTypes from "prop-types";
 import "../assets/styles/components/Player.scss";
 import NotFound from "./NotFound";
 
@@ -21,6 +22,8 @@ const Player = (props) => {
   /* function that is available inside the props as it is encapsulated in browser router */
   const handleButton = () => history.goBack();
 
+  /* pass it the ID it needs so that it will then go to our reducer,
+  filter by ID, and in this way we will obtain in the state the array with the ID and get the source */
   useEffect(() => {
     getVideoSource(id);
   }, []);
@@ -49,5 +52,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = { getVideoSource };
+
+Player.propTypes = {
+  playing: PropTypes.object,
+  getVideoSource: PropTypes.func,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

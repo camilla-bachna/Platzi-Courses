@@ -50,6 +50,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         playing:
+          /* or [...state.trends, ...state.originals].find(item => item.id === Number(action.payload)) || [] */
           state.trends.find((item) => item.id === Number(action.payload)) ||
           state.originals.find((item) => item.id === Number(action.payload)) ||
           [],

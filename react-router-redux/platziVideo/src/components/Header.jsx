@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { logoutRequest } from "../actions";
 import "../assets/styles/components/Header.scss";
@@ -9,19 +9,25 @@ import userIcon from "../assets/static/user-icon.png";
 import gravatar from "../utils/gravatar";
 import PropTypes from "prop-types";
 
-const Header = (props) => {
-  const { user } = props;
-
+const Header = ({ user }) => {
   /* we can use .length with an array, but here we have an object => like this we can check how many elements that object has
   in initialState.js we have  user: {}, */
   const hasUser = Object.keys(user).length > 0;
   /* This way I reset the status and there is no longer a user
   makes use of our action: payload here is an empty object */
+
   const handleLogout = () => {
     props.logoutRequest({});
   };
+
+  const headerClass =
+    useLocation().pathname === "/register" ||
+    useLocation().pathname === "/login"
+      ? "greenHeader"
+      : "";
+
   return (
-    <header className="header">
+    <header className={`header ${headerClass}`}>
       {/* the logo will always lead to the root of the project */}
       <Link to="/" rel="canonical">
         <img className="header__img" src={logoPlatziVideo} alt="Platzi Video" />
@@ -66,7 +72,7 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  //user: PropTypes.object,
+  user: PropTypes.object,
   logoutRequest: PropTypes.func,
 };
 
