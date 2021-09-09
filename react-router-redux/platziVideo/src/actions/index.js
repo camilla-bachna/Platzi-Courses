@@ -4,6 +4,7 @@ export const actions = {
   deleteFavorite: "DELETE_FAVORITE",
   loginRequest: "LOGIN_REQUEST",
   logoutRequest: "LOGOUT_REQUEST",
+  registerRequest: "REGISTER_REQUEST",
 };
 
 export const setFavorite = (payload) => ({
@@ -27,5 +28,10 @@ export const loginRequest = (payload) => ({
 
 export const logoutRequest = (payload) => ({
   type: actions.logoutRequest,
+  payload,
+});
+
+export const registerRequest = (payload) => ({
+  type: actions.registerRequest,
   payload,
 });

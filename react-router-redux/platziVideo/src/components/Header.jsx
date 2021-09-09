@@ -40,6 +40,7 @@ const Header = (props) => {
           {hasUser ? (
             <>
               <li>
+                {/*  a triggers a full page refresh */}
                 <a href="/">{`Bienvenido ${user.name}`}</a>
               </li>
               <li>
