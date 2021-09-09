@@ -4,6 +4,7 @@ import { setFavorite, deleteFavorite } from "../actions";
 import PropTypes from "prop-types";
 import "../assets/styles/components/CarouselItem.scss";
 import playIcon from "../assets/static/play-icon.png";
+import { Link } from "react-router-dom";
 import plusIcon from "../assets/static/plus-icon.png";
 import removeIcon from "../assets/static/remove-icon.png";
 
@@ -31,11 +32,14 @@ const CarouselItem = (props) => {
       <img className="carousel-item__img" src={cover} alt={title} />
       <div className="carousel-item__details">
         <div>
-          <img
-            className="carousel-item__details--img"
-            src={playIcon}
-            alt="Play Icon"
-          />
+          {/* like this we create a URL for each video */}
+          <Link to={`/player/${id}`}>
+            <img
+              className="carousel-item__details--img"
+              src={playIcon}
+              alt="Play Icon"
+            />
+          </Link>
           {/* have to call handleDeleteFavorite differently (create a function that returns handleDeleteFavorite),
           because we are not only executing it, but we must pass a value to it (the id)
           We will pass id to our action so that we can also identify it in our reducer and, thus, to be able to eliminate it of our state 

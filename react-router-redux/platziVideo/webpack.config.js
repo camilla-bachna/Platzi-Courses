@@ -9,6 +9,7 @@ module.exports = {
     //resolve allows us to detect the directory we are in and we pass it a directory in which we will save the files
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
+    publicPath: "/",
     assetModuleFilename: "assets/[hash].[ext]",
   },
   resolve: {

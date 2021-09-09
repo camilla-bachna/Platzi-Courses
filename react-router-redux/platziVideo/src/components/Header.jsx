@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 
 const Header = (props) => {
   const { user } = props;
+
   /* we can use .length with an array, but here we have an object => like this we can check how many elements that object has
   in initialState.js we have  user: {}, */
   const hasUser = Object.keys(user).length > 0;
@@ -65,8 +66,8 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  user: PropTypes.object.isRequired,
-  logoutRequest: PropTypes.func.isRequired,
+  //user: PropTypes.object,
+  logoutRequest: PropTypes.func,
 };
 
 /* is in charge to map our properties of the state */

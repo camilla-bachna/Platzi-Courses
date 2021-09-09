@@ -41,6 +41,20 @@ const reducer = (state, action) => {
     case actions.registerRequest:
       return { ...state, user: action.payload };
 
+    case actions.getVideoSource:
+      /* state.trends contains the id of the items. We will look for the item with the id that matches with action.payload
+      and get that item.
+      And if you don't find anything in the trends you are going to search in originals.
+      And if you don't find anything we return an empty array */
+
+      return {
+        ...state,
+        playing:
+          state.trends.find((item) => item.id === Number(action.payload)) ||
+          state.originals.find((item) => item.id === Number(action.payload)) ||
+          [],
+      };
+
     default:
       return state;
   }
