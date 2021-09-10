@@ -9,7 +9,7 @@ import userIcon from "../assets/static/user-icon.png";
 import gravatar from "../utils/gravatar";
 import PropTypes from "prop-types";
 
-const Header = ({ user }) => {
+const Header = ({ user, logoutRequest }) => {
   /* we can use .length with an array, but here we have an object => like this we can check how many elements that object has
   in initialState.js we have  user: {}, */
   const hasUser = Object.keys(user).length > 0;
@@ -17,7 +17,7 @@ const Header = ({ user }) => {
   makes use of our action: payload here is an empty object */
 
   const handleLogout = () => {
-    props.logoutRequest({});
+    logoutRequest({});
   };
 
   const headerClass =
@@ -40,6 +40,7 @@ const Header = ({ user }) => {
           ) : (
             <img src={userIcon} alt="" />
           )}
+
           <p>Perfil</p>
         </div>
         <ul>

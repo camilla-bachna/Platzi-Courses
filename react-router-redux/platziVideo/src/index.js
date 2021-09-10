@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, compose } from "redux";
 import initialState from "../initialState";
 import reducer from "./reducers";
 import App from "./routes/App";
@@ -14,7 +14,10 @@ Allows the state to be updated via dispatch(action)
 Registers listeners via subscribe(listener)
 Handles deregistration of listeners via return of subscribe(listener) function*/
 
-const store = createStore(reducer, initialState);
+/* will allow us to listen in navigator */
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducer, initialState, composeEnhancers());
 
 /* render receives 2 parameters: The first is our application and the second is where the elements would be rendered.
 The first is our application and the second is where the elements would be rendered.

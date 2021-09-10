@@ -6,8 +6,8 @@ action: action that was sent by the component to the Reduce to update */
 const reducer = (state, action) => {
   switch (action.type) {
     case actions.setFavorite:
-      console.log("state.mylist", state.mylist); //fist state.mylist is an empty array, if I add another one => {id: 9, cover: "http://dummyimage.com/800x600.png/604180/ffffff", title: "Alien Highway"...}
-      console.log("action", action); //{type: "SET_FAVORITE", payload: {id: 2, cover: "http://dummyimage.com/800x600.png/99118E/…}}
+      //console.log("state.mylist", state.mylist); fist state.mylist is an empty array, if I add another one => {id: 9, cover: "http://dummyimage.com/800x600.png/604180/ffffff", title: "Alien Highway"...}
+      //console.log("action", action); {type: "SET_FAVORITE", payload: {id: 2, cover: "http://dummyimage.com/800x600.png/99118E/…}}
       return {
         ...state,
         /* action.payload: is going to be the item I'm going to be waiting for in this list.
@@ -20,8 +20,8 @@ const reducer = (state, action) => {
       };
 
     case actions.deleteFavorite:
-      console.log("state.mylist", state.mylist); //{id: 2, cover: "http://dummyimage.com/800x600.png/99118E/ffffff", title: "In the Dark"...}
-      console.log("action", action); //{type: "DELETE_FAVORITE", payload: 2}
+      //console.log("state.mylist", state.mylist); {id: 2, cover: "http://dummyimage.com/800x600.png/99118E/ffffff", title: "In the Dark"...}
+      //console.log("action", action); {type: "DELETE_FAVORITE", payload: 2}
       return {
         ...state,
         /* items is the original state in this case and
@@ -54,6 +54,20 @@ const reducer = (state, action) => {
           state.trends.find((item) => item.id === Number(action.payload)) ||
           state.originals.find((item) => item.id === Number(action.payload)) ||
           [],
+      };
+
+    case actions.setSearch:
+      return {
+        ...state,
+        mylist: state.mylist.filter((item) =>
+          item.title.toLowerCase().includes(action.payload.trim().toLowerCase())
+        ),
+        trends: state.trends.filter((item) =>
+          item.title.toLowerCase().includes(action.payload.trim().toLowerCase())
+        ),
+        originals: state.originals.filter((item) =>
+          item.title.toLowerCase().includes(action.payload.trim().toLowerCase())
+        ),
       };
 
     default:

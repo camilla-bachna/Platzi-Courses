@@ -16,7 +16,7 @@ const Home = ({ mylist, trends, originals }) => {
   So, before I even render our application our Store is already ready to go */
   return (
     <>
-      <Search />
+      <Search isHome />
 
       {mylist.length > 0 && (
         <Categories title="Mi Lista">
