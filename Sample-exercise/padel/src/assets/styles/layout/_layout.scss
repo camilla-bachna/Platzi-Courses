@@ -1,0 +1,9 @@
+@import "../core/reset";
+@import "../core/variables";
+@import "../core/mixins";
+
+.global {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}

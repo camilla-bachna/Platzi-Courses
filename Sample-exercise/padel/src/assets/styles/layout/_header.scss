@@ -1,0 +1,31 @@
+@import "../core/reset";
+@import "../core/variables";
+@import "../core/mixins";
+
+.header {
+  width: 100%;
+  height: 7rem;
+  outline: 1px dashed red;
+  &__title {
+    text-align: center;
+    margin: 5px;
+  }
+  &__nav-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    &--item {
+      text-align: center;
+      flex-grow: 1;
+      line-height: 5rem;
+      transition: flex 0.5s;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    &--icon {
+      background-color: $bg-color;
+      border-radius: 100%;
+    }
+  }
+}
