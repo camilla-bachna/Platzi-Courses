@@ -3,7 +3,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Landing from "../containers/Landing";
 import Layout from "../components/Layout";
 import Login from "../containers/Login";
-import getPin from "../containers/getPin";
+import GetPin from "../containers/GetPin";
+import PrivateArea from "../containers/PrivateArea";
 
 const App = () => (
   <BrowserRouter>
@@ -11,7 +12,8 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/getPin" component={getPin} />
+        <Route exact path="/getPin" component={GetPin} />
+        <Route exact path="/privateArea" component={PrivateArea} />
       </Switch>
     </Layout>
   </BrowserRouter>
