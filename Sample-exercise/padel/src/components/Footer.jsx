@@ -1,9 +1,11 @@
 import React from "react";
+import "../assets/styles/layout/_footer.scss";
 
 const Footer = () => (
-  <footer>
+  <footer className="footer">
     <small>
-      created with <i className="fas fa-heart"></i> by camilla-bachna
+      created with <i className="fas fa-heart footer__icon"></i> by
+      camilla-bachna
     </small>
   </footer>
 );

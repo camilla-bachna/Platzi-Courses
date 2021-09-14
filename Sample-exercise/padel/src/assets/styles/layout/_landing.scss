@@ -1,0 +1,10 @@
+@import "../core/reset";
+@import "../core/variables";
+@import "../core/mixins";
+
+.main {
+  @include layout;
+  flex-direction: column;
+  flex-grow: 1;
+  outline: 1px dashed red;
+}

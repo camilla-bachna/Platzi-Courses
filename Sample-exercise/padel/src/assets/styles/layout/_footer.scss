@@ -1,0 +1,14 @@
+@import "../core/reset";
+@import "../core/variables";
+@import "../core/mixins";
+
+.footer {
+  @include layout;
+  width: 100%;
+  height: 5rem;
+  margin-top: auto;
+  outline: 1px dashed red;
+  &__icon {
+    color: $bg-color;
+  }
+}

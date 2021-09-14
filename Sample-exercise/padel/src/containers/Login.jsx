@@ -2,25 +2,27 @@ import React from "react";
 
 const Login = () => {
   return (
-    <section>
-      <h2>Únete</h2>
-      <form>
+    <main className="main">
+      <h2 className="main__title">Únete</h2>
+      <form className="main__form">
         <input
           name="pin"
-          className="input"
+          className="main__form--input"
           type="text"
           placeholder="Pozo pin"
         />
         <input name="name" className="input" type="text" placeholder="Nombre" />
         <input
           name="gender"
-          className="input"
+          className="main__form--input"
           type="text"
           placeholder="Género"
         />
-        <button type="submit">Únete</button>
+        <button type="submit" className="main__button">
+          Únete
+        </button>
       </form>
-    </section>
+    </main>
   );
 };
 

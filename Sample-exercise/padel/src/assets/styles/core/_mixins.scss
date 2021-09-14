@@ -1,0 +1,12 @@
+@mixin layout() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin frame($height, $width, $margin, $padding) {
+  height: $height;
+  width: $width;
+  margin: $margin;
+  padding: $padding;
+}
