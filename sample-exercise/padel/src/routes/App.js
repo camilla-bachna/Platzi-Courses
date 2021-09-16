@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import Login from "../containers/Login";
 import GetPin from "../containers/GetPin";
 import PrivateArea from "../containers/PrivateArea";
+import NotFound from "../containers/NotFound";
 
 const App = () => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ const App = () => (
         <Route exact path="/login" component={Login} />
         <Route exact path="/getPin" component={GetPin} />
         <Route exact path="/privateArea" component={PrivateArea} />
+        <Route component={NotFound} />
       </Switch>
     </Layout>
   </BrowserRouter>

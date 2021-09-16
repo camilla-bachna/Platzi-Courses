@@ -2,6 +2,7 @@ import { actions } from "../actions";
 
 const reducer = (state, action) => {
   console.log("state", state, "action", action.payload);
+
   switch (action.type) {
     case actions.loginRequest:
       return { ...state, user: action.payload };
@@ -11,6 +12,11 @@ const reducer = (state, action) => {
       return { ...state, courts: action.payload };
     case actions.setPin:
       return { ...state, pins: action.payload };
+    case actions.setPlayer:
+      return {
+        ...state,
+        player: action.payload,
+      };
     default:
       return state;
   }

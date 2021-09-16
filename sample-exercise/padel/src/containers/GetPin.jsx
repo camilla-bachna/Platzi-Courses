@@ -10,7 +10,7 @@ const GetPin = (props) => {
   const [pin, setPin] = useState(0);
 
   const handlePin = () => setPin(uuidv4());
-  console.log(setPin);
+
   props.setPin(pin);
 
   const handleInput = ({ target }) =>
@@ -62,7 +62,7 @@ const GetPin = (props) => {
       ) : (
         <p>Por favor, pulse el botón "Nuevo pozo" para obtener el pin</p>
       )}
-      <Link to="/">Volver </Link>
+      <Link to="/">Regresa</Link>
     </main>
   );
 };

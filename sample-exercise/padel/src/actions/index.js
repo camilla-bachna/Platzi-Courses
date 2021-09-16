@@ -3,6 +3,7 @@ export const actions = {
   logoutRequest: "LOGOUT_REQUEST",
   setCourts: "SET_COURTS",
   setPin: "SET_PIN",
+  setPlayer: "SET_PLAYER",
 };
 
 export const loginRequest = (payload) => ({
@@ -22,5 +23,10 @@ export const setCourts = (payload) => ({
 
 export const setPin = (payload) => ({
   type: actions.setPin,
+  payload,
+});
+
+export const setPlayer = (payload) => ({
+  type: actions.setPlayer,
   payload,
 });

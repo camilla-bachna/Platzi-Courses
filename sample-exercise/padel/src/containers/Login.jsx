@@ -77,7 +77,7 @@ const Login = (props) => {
           Únete
         </button>
       </form>
-      <Link to="/">Volver </Link>
+      <Link to="/">Regresa </Link>
     </main>
   );
 };
