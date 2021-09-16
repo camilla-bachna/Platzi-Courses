@@ -9,6 +9,8 @@ const reducer = (state, action) => {
       return { ...state, user: action.payload };
     case actions.setCourts:
       return { ...state, courts: action.payload };
+    case actions.setPin:
+      return { ...state, pins: action.payload };
     default:
       return state;
   }

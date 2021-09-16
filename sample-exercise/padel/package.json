@@ -28,6 +28,7 @@
     "redux": "^4.1.1",
     "redux-devtools-extension": "^2.13.9",
     "sweetalert2": "^11.1.5",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
   "devDependencies": {
