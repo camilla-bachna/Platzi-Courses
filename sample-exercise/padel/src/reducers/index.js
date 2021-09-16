@@ -17,6 +17,8 @@ const reducer = (state, action) => {
         ...state,
         player: action.payload,
       };
+    case actions.setResults:
+      return { ...state, results: action.payload };
     default:
       return state;
   }

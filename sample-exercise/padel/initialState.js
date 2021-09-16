@@ -7,6 +7,7 @@ const initialState = {
     { id: 3, name: "Fernando", gender: "male" },
   ],
   courts: {},
+  results: {},
 };
 
 export default initialState;

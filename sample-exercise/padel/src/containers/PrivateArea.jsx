@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { setResults } from "../actions";
 import Swal from "sweetalert2";
 
-const PrivateArea = ({ player, courts }) => {
+const PrivateArea = ({ player, courts }, props) => {
   const randomIndex = Math.floor(Math.random() * player.length);
   const randomPlayer = player[randomIndex];
 
@@ -11,16 +12,35 @@ const PrivateArea = ({ player, courts }) => {
   const randomIndexCourt = Math.floor(Math.random() * courtsArray.length);
   const randomKey = courtsArray[randomIndexCourt];
   const randomCourtsValue = courts[randomKey];
-  console.log(randomCourtsValue);
+
+  const [option, setOption] = useState("select");
+  const handleSelect = ({ target }) => {
+    setOption(target.value);
+  };
+
+  let translation;
+  option === "won" ? (translation = "Ganado") : (translation = "Perdio");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    return Swal.fire({
-      icon: "success",
-      title: "El resultado se ha guardado con exito",
-      timer: 1500,
-    });
+    props.setResults(option);
+    props.history.push("/");
+
+    if (option === "select") {
+      return Swal.fire({
+        icon: "error",
+        title: "Por favor, inténtelo de nuevo",
+        timer: 1500,
+      });
+    } else {
+      return Swal.fire({
+        icon: "success",
+        title: "El resultado se ha guardado con exito",
+        text: `Has elegido: ${translation}`,
+        timer: 1500,
+      });
+    }
   };
   return (
     <main>
@@ -29,9 +49,11 @@ const PrivateArea = ({ player, courts }) => {
         <select
           name="result"
           id="result"
-          value="result"
+          value={option}
           className="profile__select"
+          onChange={handleSelect}
         >
+          <option value="select">Elija</option>
           <option value="won">Ganado</option>
           <option value="lost">Perdido</option>
         </select>
@@ -46,4 +68,6 @@ const mapsStateToProps = (state) => {
   return { player: state.player, courts: state.courts };
 };
 
-export default connect(mapsStateToProps, null)(PrivateArea);
+const mapsDispatchToProps = { setResults };
+
+export default connect(mapsStateToProps, mapsDispatchToProps)(PrivateArea);
