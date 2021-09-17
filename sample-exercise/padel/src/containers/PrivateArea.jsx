@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { setResults } from "../actions";
 import Swal from "sweetalert2";
 
-const PrivateArea = ({ player, courts }, props) => {
+const PrivateArea = ({ player, courts, setResults, history }) => {
   const randomIndex = Math.floor(Math.random() * player.length);
   const randomPlayer = player[randomIndex];
 
@@ -16,6 +16,7 @@ const PrivateArea = ({ player, courts }, props) => {
   const [option, setOption] = useState("select");
   const handleSelect = ({ target }) => {
     setOption(target.value);
+    setResults(option);
   };
 
   let translation;
@@ -24,8 +25,7 @@ const PrivateArea = ({ player, courts }, props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    props.setResults(option);
-    props.history.push("/");
+    history.push("/");
 
     if (option === "select") {
       return Swal.fire({

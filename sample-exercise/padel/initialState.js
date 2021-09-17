@@ -6,7 +6,7 @@ const initialState = {
     { id: 2, name: "Alba", gender: "female" },
     { id: 3, name: "Fernando", gender: "male" },
   ],
-  courts: {},
+  courts: { court1: "8", court2: "7" },
   results: {},
 };
 
