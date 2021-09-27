@@ -26,7 +26,7 @@ showFormattedInfo({id: 1, username: "camilla-bachna", firstName: "Camilla"});
 
 //tipo void, como tipo de dato en variable
 let unusable: void;
-unusable = null; //Type 'null' is not assignable to type 'void'.
+//unusable = null; //Type 'null' is not assignable to type 'void'.
 unusable = undefined;
 
 

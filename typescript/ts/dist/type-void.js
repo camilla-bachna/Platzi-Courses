@@ -1,3 +1,4 @@
+"use strict";
 // Void
 //Tipo explicito
 function showInfo(user) {
@@ -16,7 +17,7 @@ showFormattedInfo({ id: 1, username: "camilla-bachna", firstName: "Camilla" });
     firstName: Camilla */
 //tipo void, como tipo de dato en variable
 var unusable;
-unusable = null; //Type 'null' is not assignable to type 'void'.
+//unusable = null; //Type 'null' is not assignable to type 'void'.
 unusable = undefined;
 //Tipo: Never 
 function handleError(code, message) {
