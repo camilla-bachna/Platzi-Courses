@@ -4,17 +4,6 @@
 const portrait = 1;
 const square = 2;
 const panorama = 3; */
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var PhotoOrientation;
 (function (PhotoOrientation) {
     PhotoOrientation[PhotoOrientation["Landscape"] = 0] = "Landscape";
@@ -22,7 +11,7 @@ var PhotoOrientation;
     PhotoOrientation[PhotoOrientation["Square"] = 2] = "Square";
     PhotoOrientation[PhotoOrientation["Panorama"] = 3] = "Panorama";
 })(PhotoOrientation || (PhotoOrientation = {}));
-var landscape = PhotoOrientation.Landscape;
+const landscape = PhotoOrientation.Landscape;
 console.log("landscape", landscape); //landscape 0
 console.log("landscape", PhotoOrientation[0]); //landscape Landscape
 console.log("landscape", PhotoOrientation[landscape]); //landscape Landscape
@@ -45,7 +34,7 @@ var Country;
     Country["EEUU"] = "usa";
     Country["Espana"] = "esp";
 })(Country || (Country = {}));
-var countries = __assign({}, Country);
+const countries = Object.assign({}, Country);
 console.log(countries);
 /* {
   Bolivia: 'bol',
@@ -54,6 +43,6 @@ console.log(countries);
   EEUU: 'usa',
   Espana: 'esp'
 } */
-var country = Country.Colombia;
+const country = Country.Colombia;
 console.log("country", country); //country col
 //! Country.Mexico = 'MX' //!This gives an error, we cannot modify its value.

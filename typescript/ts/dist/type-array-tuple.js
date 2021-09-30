@@ -2,14 +2,14 @@
 //Array
 //Corchetes []
 //Tipo Explicito
-var users;
+let users;
 users = ["camilla-bachna", "paparazzi", "lensqueen"];
 //users = [1, true, "test"]; //Error Type 'number' is not assignable to type 'string'. Type 'boolean' is not assignable to type 'string'.
 //Tipo Inferido
-var otherUsers = ["camilla-bachna", "paparazzi", "lensqueen"]; //let otherUsers: string[]
+let otherUsers = ["camilla-bachna", "paparazzi", "lensqueen"]; //let otherUsers: string[]
 //users = [1, true, "test"]; //Error
 //Array<TIPO>
-var pictureTitles; //let pictureTitles: string[]
+let pictureTitles; //let pictureTitles: string[]
 pictureTitles = ["Favorite Sunset", "Vacation time", "Landscape"];
 //Accessing values in an array
 console.log("first user", users[0]); //first user camilla-bachna
@@ -22,7 +22,7 @@ users.sort();
 console.log("users", users); //users [ 'camilla-bachna', 'guillermo', 'lensqueen', 'paparazzi' ]
 //Tuple
 //example [1, "user"]
-var userIdentification;
+let userIdentification;
 userIdentification = [1, "Camilla"];
 console.log("userIdentification", userIdentification); //userIdentification [ 1, 'Camilla' ]
 console.log("username", userIdentification[1]); //username Camilla
@@ -30,11 +30,11 @@ console.log("username", userIdentification[1].toLowerCase()); //username camilla
 console.log("id", userIdentification[0]); //id 1
 //Tuples with various values
 //id (number), username (string), is Pro (boolean)
-var userInfo;
+let userInfo;
 userInfo = [2, "paparazzi", true];
 console.log("userInfo", userInfo); //userInfo [ 2, 'paparazzi', true ]
 //array of tuples
-var array = []; //have to initialize with an empty array
+let array = []; //have to initialize with an empty array
 array.push([1, "camilla-bachna"]);
 array.push([2, "luixaviles"]);
 array.push([3, "paparazzi"]);
