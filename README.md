@@ -12,3 +12,5 @@ Courses:
 - Curso Profesional de JavaScript
 - Curso de Webpack
 - Curso Práctico de React JS 
+- Curso de React Router y Redux
+- Curso Fundamentos de TypeScript
