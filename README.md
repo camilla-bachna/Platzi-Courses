@@ -14,3 +14,4 @@ Courses:
 - Curso Práctico de React JS 
 - Curso de React Router y Redux
 - Curso Fundamentos de TypeScript
+- Curso Fundamentos de Angular
