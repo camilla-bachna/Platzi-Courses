@@ -1,7 +1,76 @@
-<h1>Hola mundo</h1>
+<h1>Angular</h1>
+<h2>Properties</h2>
+<h2>Property Binding</h2>
+<button [disabled]="btnDisabled">Enviar</button>
+<input type="text" name="name" [value]="person.name" id="name" />
+<progress max="100" [value]="person.age"></progress>
+<img [src]="person.avatar" alt="random pictures" width="100" height="100" />
+<hr />
+<h2>String Interpolation</h2>
+<h2>Hola mundo</h2>
 <h2>{{ "Hola mundo".repeat(5) }}</h2>
 <!-- the second one is a string, inside the braces I can run JS expressions -->
 <p>3 + 3 = {{ 3 + 3 }}</p>
 <!-- {{ 3 + 3 }} has been assessed and executed -->
 <h3>Hola, soy {{ name }}, y tengo {{ age }} años.</h3>
-<img src="{{ img }}" alt="random pictures" width="300" height="300" />
+<img src="{{ img }}" alt="random pictures" width="100" height="100" />
+<hr />
+<h2>Events</h2>
+<button [disabled]="btnDisabled">Enviar</button>
+<button (click)="toogleBtn()">Toogle Button</button>
+<p>Edad {{ person.age }}</p>
+<button (click)="increaseAgeBtn()">Age ++</button>
+<div class="box" (scroll)="onScroll($event)">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, at
+  corporis laborum quos neque esse eligendi consequatur. Eveniet earum
+  voluptates consequatur, deserunt cumque nulla nihil harum rem voluptatum odit
+  accusantium. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio,
+  doloribus blanditiis, numquam officia necessitatibus veritatis sapiente iusto
+  porro omnis cum assumenda rerum laboriosam dolore aliquam praesentium
+  voluptatem consequuntur quibusdam ex.
+</div>
+<p>Name {{ person.name }}</p>
+<input
+  type="text"
+  name="name"
+  [value]="person.name"
+  id="name"
+  (keyup)="changeName($event)"
+/>
+<hr />
+<h2>NgModel</h2>
+<p>Name {{ person.name }}</p>
+<input
+  type="text"
+  name="name"
+  required
+  #nameInput="ngModel"
+  [(ngModel)]="person.name"
+  id="name"
+/>
+<!-- combination of [value]="person.name" and (keyup)="changeName($event)" -->
+<p>Valid: {{ nameInput.valid }}</p>
+<!-- Valid: true -->
+<p>Age {{ person.age }}</p>
+<input
+  type="number"
+  name="age"
+  max="18"
+  min="10"
+  required
+  #ageInput="ngModel"
+  [(ngModel)]="person.age"
+  id="age"
+/>
+<p>Valid: {{ ageInput.valid }}</p>
+<hr />
+<h2>*ngIf</h2>
+<input type="text" name="name" required [(ngModel)]="person.name" id="name" />
+<p *ngIf="person.name === 'Nicolas'">Soy Nicolas</p>
+<p *ngIf="person.name === 'Julian' && person.age === 18; else elseBlock">
+  Soy Julian
+</p>
+<ng-template #elseBlock
+  ><p>Alternative text while primary text is hidden</p></ng-template
+>
+<!-- in case condition is not fulfilled show elseBlock -->
