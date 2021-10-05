@@ -74,3 +74,39 @@
   ><p>Alternative text while primary text is hidden</p></ng-template
 >
 <!-- in case condition is not fulfilled show elseBlock -->
+<hr />
+<h2>*ngFor</h2>
+<input type="text" name="name" required [(ngModel)]="newName" id="name" />
+<button (click)="addName()">Add name</button>
+<ul>
+  <li *ngIf="names.length === 0">No hay nombres</li>
+  <li *ngFor="let name of names; index as i">
+    {{ i }} {{ name }}<button (click)="removeName(i)">Delete</button>
+  </li>
+</ul>
+<input type="text" name="emoji" required [(ngModel)]="newEmoji" id="emoji" />
+<button (click)="addEmoji()">Add emoji</button>
+<ul>
+  <li *ngIf="emojis.length === 0">No hay emojis</li>
+  <li *ngFor="let emoji of emojis; index as i">
+    {{ i }} {{ emoji }}<button (click)="removeEmoji(i)">Delete</button>
+  </li>
+</ul>
+<hr />
+<h2>*ngFor Objs</h2>
+<div>
+  <div *ngFor="let product of products">
+    <img [src]="product.image" alt="product image" width="100" />
+    <h2>{{ product.price }}</h2>
+    <p>{{ product.name }}</p>
+  </div>
+</div>
+<hr />
+<h2>ngSwitch</h2>
+<input type="text" name="name" required [(ngModel)]="person.name" id="name" />
+<div [ngSwitch]="person.name">
+  <p *ngSwitchCase="'Nicolas'">La persona es Nicolas</p>
+  <p *ngSwitchCase="'Julian'">La persona es Julian</p>
+  <p *ngSwitchCase="'Camilo'">La persona es Camilo</p>
+  <p *ngSwitchDefault>No hace match</p>
+</div>
