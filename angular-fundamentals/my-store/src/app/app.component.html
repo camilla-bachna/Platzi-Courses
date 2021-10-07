@@ -13,7 +13,7 @@
 <p>3 + 3 = {{ 3 + 3 }}</p>
 <!-- {{ 3 + 3 }} has been assessed and executed -->
 <h3>Hola, soy {{ name }}, y tengo {{ age }} años.</h3>
-<img src="{{ img }}" alt="random pictures" width="100" height="100" />
+<img src="{{ img }}" alt="random pictures" width="200" />
 <hr />
 <h2>Events</h2>
 <button [disabled]="btnDisabled">Enviar</button>
@@ -94,9 +94,9 @@
 </ul>
 <hr />
 <h2>*ngFor Objs</h2>
-<div>
+<div class="ngForContainter__products--grid">
   <div *ngFor="let product of products">
-    <img [src]="product.image" alt="product image" width="100" />
+    <img [src]="product.image" alt="product image" />
     <h2>{{ product.price }}</h2>
     <p>{{ product.name }}</p>
   </div>
@@ -110,3 +110,153 @@
   <p *ngSwitchCase="'Camilo'">La persona es Camilo</p>
   <p *ngSwitchDefault>No hace match</p>
 </div>
+<hr />
+<h2>Class & Style</h2>
+<input type="text" required #nameInput2="ngModel" [(ngModel)]="person.name" />
+<p class="message-error" [class.active]="nameInput2.invalid">
+  El campo es requerido
+</p>
+<label [style.font-style]="nameInput3.invalid ? 'italic' : 'normal'"
+  >Nombre</label
+>
+<input type="text" required #nameInput3="ngModel" [(ngModel)]="person.name" />
+<p [style.font-style]="nameInput3.invalid ? 'italic' : 'normal'">
+  Texto texto texto
+</p>
+<div class="styles">
+  <div>
+    <input type="text" [(ngModel)]="widthImg" />
+  </div>
+  <div>
+    <img [src]="person.avatar" alt="avatar" [style.width.px]="widthImg" />
+  </div>
+</div>
+<hr />
+<h2>NgClass & NgStyle</h2>
+<input type="text" required #nameInput4="ngModel" [(ngModel)]="person.name" />
+<hr
+  class="line-error"
+  [ngClass]="{ active: nameInput4.invalid, inactive: nameInput4.valid }"
+/>
+<p class="message-error" [class.active]="nameInput4.invalid">
+  El campo es requerido
+</p>
+<div class="styles">
+  <div>
+    <input type="number" [(ngModel)]="box.width" />
+    <input type="number" [(ngModel)]="box.height" />
+    <input type="color" [(ngModel)]="box.background" />
+  </div>
+  <div
+    [ngStyle]="{
+      'width.px': box.width,
+      'height.px': box.height,
+      background: box.background,
+      display: 'block'
+    }"
+  ></div>
+</div>
+<hr />
+<h2>Formulario</h2>
+
+<form (ngSubmit)="onRegister()" #myForm="ngForm" class="form__myaccount">
+  <div class="form__myaccount--container">
+    <h3>My account</h3>
+    <div class="input-group">
+      <label
+        for="name"
+        [ngStyle]="{
+          'width.%': formLabel.width,
+          'margin-bottom.px': formLabel.marginBottom,
+          'font-weight': formLabel.fontWeight
+        }"
+        >Name</label
+      ><input
+        type="text"
+        name="name"
+        required
+        id="name"
+        placeholder="Camila Yakoo"
+        [(ngModel)]="register.name"
+        #nameInput5="ngModel"
+        [ngStyle]="{
+          'width.%': formInput.width,
+          background: formInput.background,
+          color: formInput.color,
+          border: formInput.border,
+          'border-radius.px': formInput.borderRadius
+        }"
+      />
+      <p class="error-message" [class.active]="nameInput5.invalid">
+        Please fill out field
+      </p>
+    </div>
+    <div class="input-group">
+      <label
+        for="email"
+        [ngStyle]="{
+          'width.%': formLabel.width,
+          'margin-bottom.px': formLabel.marginBottom,
+          'font-weight': formLabel.fontWeight
+        }"
+        >Email address</label
+      ><input
+        type="email"
+        name="email"
+        required
+        id="email"
+        placeholder="camillayakoo@gmail.com"
+        [(ngModel)]="register.email"
+        #emailInput="ngModel"
+        [ngStyle]="{
+          'width.%': formInput.width,
+          background: formInput.background,
+          color: formInput.color,
+          border: formInput.border,
+          'border-radius.px': formInput.borderRadius
+        }"
+      />
+      <p class="error-message" [class.active]="emailInput.invalid">
+        Please fill out field
+      </p>
+    </div>
+    <div class="input-group">
+      <label
+        for="password"
+        [ngStyle]="{
+          'width.%': formLabel.width,
+          'margin-bottom.px': formLabel.marginBottom,
+          'font-weight': formLabel.fontWeight
+        }"
+        >Password</label
+      ><input
+        type="password"
+        name="password"
+        required
+        id="password"
+        placeholder="*********"
+        [(ngModel)]="register.password"
+        #passwordInput="ngModel"
+        [ngStyle]="{
+          'width.%': formInput.width,
+          background: formInput.background,
+          color: formInput.color,
+          border: formInput.border,
+          'border-radius.px': formInput.borderRadius
+        }"
+      />
+      <p class="error-message" [class.active]="passwordInput.invalid">
+        Please fill out field
+      </p>
+    </div>
+    <button
+      [disabled]="myForm.invalid"
+      type="submit"
+      class="button__submit"
+      [ngClass]="{ active: myForm.invalid, inactive: myForm.valid }"
+    >
+      Register
+    </button>
+  </div>
+  <!-- <button type="button">Accion</button> -->
+</form>

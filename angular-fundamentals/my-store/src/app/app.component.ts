@@ -11,6 +11,12 @@ export class AppComponent {
   age: number = 23;
   img: string = 'https://source.unsplash.com/random';
   btnDisabled = true;
+  register = {
+    name: '',
+    email: '',
+    password: '',
+  };
+  widthImg = 10;
   person = {
     name: 'Nicolas',
     age: 18,
@@ -20,6 +26,15 @@ export class AppComponent {
   newName = '';
   emojis = ['😂', '🐦', '🐳', '🌮', '💚'];
   newEmoji = '';
+  box = { width: 100, height: 100, background: 'red' };
+  formLabel = { width: 100, marginBottom: 5, fontWeight: 'bold' };
+  formInput = {
+    width: 100,
+    background: '#F0F8FF',
+    color: 'grey',
+    border: 'none',
+    borderRadius: '5',
+  };
   products: Product[] = [
     {
       name: 'EL mejor juguete',
@@ -88,5 +103,8 @@ export class AppComponent {
   }
   removeEmoji(index: number) {
     this.emojis.splice(index, 1);
+  }
+  onRegister() {
+    console.log(this.register);
   }
 }
