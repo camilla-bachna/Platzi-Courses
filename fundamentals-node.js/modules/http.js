@@ -11,7 +11,8 @@ and the server sends the response to the client. */
 
   switch (req.url) {
     case "/hola":
-      res.write("Hola que tal");
+      let greeting = hello();
+      res.write(greeting);
       res.end();
       break;
     default:
@@ -23,6 +24,10 @@ and the server sends the response to the client. */
   //Write response to the user
   res.write("Hola ya se usar HTTP de NodeJS");
   res.end(); */
+}
+
+function hello() {
+  return "Hola, que tal?";
 }
 
 console.log("Escuchando http en el puerto 3000");
