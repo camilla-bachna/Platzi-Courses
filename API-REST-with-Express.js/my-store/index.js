@@ -1,15 +1,15 @@
-//This app starts a server and listens on port 3000 for connections.
-//The app responds with "Hello, my express server!" for requests to the root URL (/) or route.
 const express = require('express');
+const faker = require('faker');
 
 const app = express(); //method that will create app
-const port = 3000; //where we want our app to run on (3000, 3005)
+const port = 3000; //where we want our app to run on (3000, 3005) This app starts a server and listens on port 3000 for connections.
 
 //define default route
 app.get('/', (req, res) => {
   //callback with 2 parameters which will execute the response we send to the client
   res.send('Hello, my express server!');
 });
+//The app responds with "Hello, my express server!" for requests to the root URL (/) or route.
 
 app.get('/new-route', (req, res) => {
   res.send('Hello, I am a new route or end point!');
@@ -17,21 +17,27 @@ app.get('/new-route', (req, res) => {
 
 //response in JSON format
 app.get('/products', (req, res) => {
-  res.json([
-    {
-      name: 'Product 1',
-      price: 1000,
-    },
-    {
-      name: 'Product 2',
-      price: 2000,
-    },
-    {
-      name: 'Product 3',
-      price: 3000,
-    },
-  ]);
+  const products = [];
+  const { size } = req.query;
+  const limit = size || 10; //generate 10 products if nothing is sent
+  for (let index = 0; index < limit; index++) {
+    products.push({
+      name: faker.commerce.productName(),
+      companyName: faker.company.companyName(),
+      price: parseInt(faker.commerce.price(), 10), //The parameters retrieved from query, come as a string => parseInt
+      image: faker.image.imageUrl(),
+    });
+  }
+  res.json(products);
 });
+
+/*app.get('/products/filter', (req, res) => {
+  res.send('Soy un filter');
+});
+
+http://localhost:3000/products/filter
+
+Soy un filter */
 
 app.get('/products/:id', (req, res) => {
   //I will pick up the id you are sending me and add it to the answer
@@ -44,6 +50,21 @@ app.get('/products/:id', (req, res) => {
     price: 2000,
   });
 });
+
+/*app.get('/products/filter', (req, res) => {
+  res.send('Soy un filter');
+});
+
+http://localhost:3000/products/filter
+
+{
+  "id": "filter",
+  "name": "Product 2",
+  "price": 2000
+}
+
+A common error:
+Specific endpoints must be declared before dynamic endpoints. */
 
 app.get('/categories', (req, res) => {
   res.json([
@@ -92,19 +113,21 @@ app.get('/categories/:categoryId/article/:articleId', (req, res) => {
 } */
 
 app.get('/users', (req, res) => {
-  res.json([
-    {
-      userName: 'Sofia',
-      email: 'sofia.ejemplo@gmail.com',
-      password: '123456',
-    },
-    {
-      userName: 'Fernando',
-      email: 'fernamdo.torres@gmail.com',
-      password: 'Supersafe',
-    },
-  ]);
+  const { limit, offset } = req.query;
+  if (limit && offset) {
+    //as they are optional make validation if these values exit or not, these parameters may not have been sent
+    res.json({ limit, offset });
+  } else {
+    res.send('No hay parámetros');
+  }
 });
+
+/* By default: http://localhost:3000/users No hay parámetros
+// http://localhost:3000/users?limit=10&offset=200
+{
+  "limit": "10",
+  "offset": "200"
+} */
 
 app.get(
   '/users/:userId/orders/:orderId/categories/:categoryId/articles/:articleId',
