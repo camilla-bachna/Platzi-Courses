@@ -1,4 +1,5 @@
 const express = require('express');
+const faker = require('faker');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -46,5 +47,45 @@ router.get('/:categoryId/article/:articleId', (req, res) => {
   "articleId": "22",
   "article": "Table"
 } */
+
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  res.json({
+    id,
+    category: 'Bathroom',
+    article: faker.commerce.productName(),
+    price: parseInt(faker.commerce.price(), 10),
+  });
+});
+
+//POST
+router.post('/', (req, res) => {
+  const body = req.body;
+  res.json({
+    message: 'created',
+    data: body,
+  });
+});
+
+//PATCH Update product partially
+router.patch('/:id', (req, res) => {
+  const { id } = req.params;
+  const body = req.body;
+  res.json({
+    message: 'updated',
+    data: body,
+    id,
+  });
+});
+
+//DELETE
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  const body = req.body;
+  res.json({
+    message: 'deleted',
+    id,
+  });
+});
 
 module.exports = router;

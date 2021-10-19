@@ -55,12 +55,36 @@ http://localhost:3000/products/filter
 A common error:
 Specific endpoints must be declared before dynamic endpoints. */
 
+//POST
 router.post('/', (req, res) => {
   //in body we receive parameters
   const body = req.body;
   res.json({
     message: 'created',
     data: body,
+  });
+});
+
+//PATCH Update product partially
+router.patch('/:id', (req, res) => {
+  //instead of patch we can use put
+  const { id } = req.params;
+  const body = req.body;
+  res.json({
+    message: 'updated',
+    data: body,
+    id,
+  });
+});
+
+//DELETE
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  //send id so product can be eliminated
+  const body = req.body;
+  res.json({
+    message: 'deleted',
+    id,
   });
 });
 
