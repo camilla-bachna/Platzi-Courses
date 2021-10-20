@@ -1,11 +1,15 @@
 const express = require('express');
-const faker = require('faker');
+
+const ProductService = require('./../services/product.service');
 
 const router = express.Router();
+//create instance of product service since ProductService is a class
+const service = new ProductService();
 
 //response in JSON format
 router.get('/', (req, res) => {
-  //before app.get('/products', ...)
+  const products = service.find();
+  /* //before app.get('/products', ...)
   const products = [];
   const { size } = req.query;
   const limit = size || 10; //generate 10 products if nothing is sent
@@ -16,7 +20,7 @@ router.get('/', (req, res) => {
       price: parseInt(faker.commerce.price(), 10), //The parameters retrieved from query, come as a string => parseInt
       imageUrl: faker.image.imageUrl(),
     });
-  }
+  } */
   res.json(products);
 });
 
@@ -29,16 +33,30 @@ router.get('/filter', (req, res) => {
 Soy un filter */
 
 router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  const product = service.findOne(id);
+  res.json(product);
+});
+
+/* old code
+router.get('/:id', (req, res) => {
   //I will pick up the id you are sending me and add it to the answer
   //id because thats how we added it /:id
   const id = req.params.id;
   //ES6 const {id} = req.params;
-  res.json({
-    id,
-    name: 'Product 2',
-    price: 2000,
-  });
-});
+  if (id === '999') {
+    res.status(404).json({
+      message: 'not found',
+    });
+  } else {
+    res.status(200).json({
+      //by default status 200, but good to specify
+      id,
+      name: 'Product 2',
+      price: 2000,
+    });
+  }
+}); */
 
 /*router.get('/filter', (req, res) => {
   res.send('Soy un filter');
@@ -59,7 +77,7 @@ Specific endpoints must be declared before dynamic endpoints. */
 router.post('/', (req, res) => {
   //in body we receive parameters
   const body = req.body;
-  res.json({
+  res.status(201).json({
     message: 'created',
     data: body,
   });

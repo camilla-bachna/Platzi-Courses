@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const productsRouter = require('./products');
-const usersRouter = require('./users');
-const categoriesRouter = require('./categories');
+const productsRouter = require('./products.router');
+const usersRouter = require('./users.router');
+const categoriesRouter = require('./categories.router');
 
 function routerApi(app) {
   //create global path for all endpoints

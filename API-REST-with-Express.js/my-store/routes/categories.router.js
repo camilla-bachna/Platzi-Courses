@@ -2,8 +2,13 @@ const express = require('express');
 const faker = require('faker');
 const router = express.Router();
 
+const CategoriesService = require('./../services/categories.service');
+const service = new CategoriesService();
+
 router.get('/', (req, res) => {
-  res.json([
+  const categories = service.find();
+  res.status(200).json(categories);
+  /* res.json([
     {
       category: 'Living room',
       subcategory: 'Lightning',
@@ -24,12 +29,24 @@ router.get('/', (req, res) => {
       subcategory: 'Decoration',
       article: 'Vase',
     },
-  ]);
+  ]); */
 });
 
-router.get('/:categoryId/article/:articleId', (req, res) => {
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+
+  const category = service.findOne(id);
+  if (!category) {
+    res.status(404).json({
+      message: `La categoria con ${id} no existe`,
+    });
+  } else {
+    res.status(200).json(category);
+  }
+});
+
+/* router.get('/:id/article', (req, res) => {
   const { categoryId } = req.params;
-  const { articleId } = req.params;
   res.json({
     categoryId,
     category: 'Living room',
@@ -39,7 +56,7 @@ router.get('/:categoryId/article/:articleId', (req, res) => {
   });
 });
 
-/* http://localhost:3000/categories/12/article/22
+http://localhost:3000/categories/12/article/22
 {
   "categoryId": "12",
   "category": "Living room",
@@ -47,16 +64,6 @@ router.get('/:categoryId/article/:articleId', (req, res) => {
   "articleId": "22",
   "article": "Table"
 } */
-
-router.get('/:id', (req, res) => {
-  const { id } = req.params;
-  res.json({
-    id,
-    category: 'Bathroom',
-    article: faker.commerce.productName(),
-    price: parseInt(faker.commerce.price(), 10),
-  });
-});
 
 //POST
 router.post('/', (req, res) => {
