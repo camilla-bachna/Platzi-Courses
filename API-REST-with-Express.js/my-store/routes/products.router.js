@@ -7,8 +7,8 @@ const router = express.Router();
 const service = new ProductService();
 
 //response in JSON format
-router.get('/', (req, res) => {
-  const products = service.find();
+router.get('/', async (req, res) => {
+  const products = await service.find();
   /* //before app.get('/products', ...)
   const products = [];
   const { size } = req.query;
@@ -32,9 +32,10 @@ router.get('/filter', (req, res) => {
 
 Soy un filter */
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params;
-  const product = service.findOne(id);
+  //since this returns a promise we have to add await
+  const product = await service.findOne(id);
   res.json(product);
 });
 
@@ -74,36 +75,47 @@ A common error:
 Specific endpoints must be declared before dynamic endpoints. */
 
 //POST
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   //in body we receive parameters
   const body = req.body;
+  const newProduct = await service.create(body);
   res.status(201).json({
     message: 'created',
-    data: body,
+    data: newProduct,
   });
 });
 
 //PATCH Update product partially
-router.patch('/:id', (req, res) => {
-  //instead of patch we can use put
-  const { id } = req.params;
-  const body = req.body;
-  res.json({
-    message: 'updated',
-    data: body,
-    id,
-  });
+router.patch('/:id', async (req, res) => {
+  try {
+    //instead of patch we can use put
+    const { id } = req.params;
+    const body = req.body;
+    const updatedProduct = await service.update(id, body);
+    res.json({
+      message: 'updated',
+      data: updatedProduct,
+      id,
+    });
+  } catch (error) {
+    //message: error.message because in product.service.js throw new Error
+    res.status(404).json({ message: error.message });
+  }
 });
 
 //DELETE
-router.delete('/:id', (req, res) => {
-  const { id } = req.params;
-  //send id so product can be eliminated
-  const body = req.body;
-  res.json({
-    message: 'deleted',
-    id,
-  });
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    //send id so product can be eliminated
+    const deletedProduct = await service.delete(id);
+    res.json({
+      message: 'deleted',
+      deletedProduct,
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
 });
 
 module.exports = router;

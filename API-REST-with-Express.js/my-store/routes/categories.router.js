@@ -1,5 +1,4 @@
 const express = require('express');
-const faker = require('faker');
 const router = express.Router();
 
 const CategoriesService = require('./../services/categories.service');
@@ -78,9 +77,10 @@ router.post('/', (req, res) => {
 router.patch('/:id', (req, res) => {
   const { id } = req.params;
   const body = req.body;
+  const updatedCategory = service.update(id, body);
   res.json({
     message: 'updated',
-    data: body,
+    data: updatedCategory,
     id,
   });
 });
@@ -88,10 +88,10 @@ router.patch('/:id', (req, res) => {
 //DELETE
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
-  const body = req.body;
+  const deletedCategory = service.delete(id);
   res.json({
     message: 'deleted',
-    id,
+    deletedCategory,
   });
 });
 

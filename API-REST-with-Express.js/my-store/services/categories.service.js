@@ -18,7 +18,14 @@ class CategoriesService {
     }
   }
 
-  create() {}
+  create(data) {
+    const newCategory = {
+      id: faker.datatype.uuid(),
+      ...data,
+    };
+    this.categories.push(newCategory);
+    return newCategory;
+  }
 
   find() {
     return this.categories;
@@ -28,9 +35,24 @@ class CategoriesService {
     return this.categories.find((category) => category.id === id);
   }
 
-  update() {}
+  update(id, changes) {
+    const index = this.categories.findIndex((category) => category.id === id);
+    if (index === -1) {
+      throw new Error('Categoria no encontrado');
+    }
+    const category = this.categories[index];
+    this.categories[index] = { ...category, ...changes };
+    return this.categories[index];
+  }
 
-  delete() {}
+  delete(id) {
+    const index = this.categories.findIndex((category) => category.id === id);
+    if (index === -1) {
+      throw new Error('Categoria no encontrado');
+    }
+    this.categories.splice(index, 1);
+    return id;
+  }
 }
 
 module.exports = CategoriesService;
