@@ -1,6 +1,12 @@
 const express = require('express');
 
 const ProductService = require('./../services/product.service');
+const validatorHandler = require('./../middlewares/validator.handler');
+const {
+  createProductSchema,
+  updateProductSchema,
+  getProductSchema,
+} = require('./../schema/product.schema');
 
 const router = express.Router();
 //create instance of product service since ProductService is a class
@@ -32,12 +38,23 @@ router.get('/filter', (req, res) => {
 
 Soy un filter */
 
-router.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  //since this returns a promise we have to add await
-  const product = await service.findOne(id);
-  res.json(product);
-});
+//explicit error middleware, since async... is another middleware we can concatenate the middleware validateHandler before, if everything is fine go to next one
+router.get(
+  '/:id',
+  //before we go to next code validate data
+  //define which schema we want to validate and where the info can be found: property, because thats where id is
+  validatorHandler(getProductSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      //since this returns a promise we have to add await
+      const product = await service.findOne(id);
+      res.json(product);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 /* old code
 router.get('/:id', (req, res) => {
@@ -75,33 +92,42 @@ A common error:
 Specific endpoints must be declared before dynamic endpoints. */
 
 //POST
-router.post('/', async (req, res) => {
-  //in body we receive parameters
-  const body = req.body;
-  const newProduct = await service.create(body);
-  res.status(201).json({
-    message: 'created',
-    data: newProduct,
-  });
-});
+router.post(
+  '/',
+  //information is in body
+  validatorHandler(createProductSchema, 'body'),
+  async (req, res) => {
+    //in body we receive parameters
+    const body = req.body;
+    const newProduct = await service.create(body);
+    res.json(newProduct);
+  }
+);
 
 //PATCH Update product partially
-router.patch('/:id', async (req, res) => {
-  try {
-    //instead of patch we can use put
-    const { id } = req.params;
-    const body = req.body;
-    const updatedProduct = await service.update(id, body);
-    res.json({
-      message: 'updated',
-      data: updatedProduct,
-      id,
-    });
-  } catch (error) {
-    //message: error.message because in product.service.js throw new Error
-    res.status(404).json({ message: error.message });
+router.patch(
+  '/:id',
+  //need two middlewares, info from body y params, first validate id then update
+  validatorHandler(getProductSchema, 'params'),
+  validatorHandler(updateProductSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      //instead of patch we can use put
+      const { id } = req.params;
+      const body = req.body;
+      const updatedProduct = await service.update(id, body);
+      res.json({
+        message: 'updated',
+        data: updatedProduct,
+        id,
+      });
+    } catch (error) {
+      //message: error.message because in product.service.js throw new Error
+      //res.status(404).json({ message: error.message });
+      next(err);
+    }
   }
-});
+);
 
 //DELETE
 router.delete('/:id', async (req, res) => {

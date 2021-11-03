@@ -11,6 +11,7 @@ class UserService {
     for (let index = 0; index < limit; index++) {
       this.users.push({
         userName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
         userId: faker.datatype.uuid(),
         email: faker.internet.email(),
         image: faker.image.avatar(),
@@ -18,7 +19,7 @@ class UserService {
     }
   }
 
-  create(data) {
+  async create(data) {
     const newUser = {
       userId: faker.datatype.uuid(),
       ...data,
