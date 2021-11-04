@@ -91,7 +91,7 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+/*.env
 .env.test
 .env.production
 
@@ -141,5 +141,8 @@ dist
 ### Node Patch ###
 # Serverless Webpack directories
 .webpack/
+
+# other
+.DS_Store
 
 # End of https://www.toptal.com/developers/gitignore/api/node,linux
